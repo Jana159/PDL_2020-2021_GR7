@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+
 /**
  * Classe abstraite pour recuperer les donnees
  * @author Groupe 4
@@ -29,20 +30,66 @@ public abstract class Donnee extends Thread{
 	private Map<Integer, Integer> nbLignesTableaux = new HashMap<Integer, Integer>();
 	private Map<Integer, Integer> nbColonnesTableaux = new HashMap<Integer, Integer>();;
 	private int nbTableaux = 0;
+
+
 	public static CyclicBarrier newBarrier = new CyclicBarrier(2);
 
-	@Override
-	public void run() {
-		// lancer une extraction
-	}
+
+
 
 	public Map<Integer, Integer> getNbLignesTableaux() {
 		return nbLignesTableaux;
 	}
-
 	public Map<Integer, Integer> getNbColonnesTableaux() {
 		return nbColonnesTableaux;
 	}
+	/**
+	 * Donne le temps du chronometre a l'instant T
+	 * @return long
+	 */
+	public long getTime(){
+		return System.currentTimeMillis() - tempsOriginal;
+	}
+	/**
+	 * Demarre le chronometre en back
+	 */
+	public void startTimer(){
+		this.tempsOriginal = System.currentTimeMillis();
+	}
+
+	/**
+	 * Verification de la presence de tableaux
+	 * @return boolean
+	 * @throws ExtractionInvalideException si erreur à l'extraction on lève une exception
+	 */
+	abstract boolean pageComporteTableau() throws ExtractionInvalideException;
+
+	/**
+	 * Récupération du nombre de tableau
+	 * @return le nombre de tableauK
+	 */
+	public abstract int getNbTableaux();
+
+	/**
+	 * Extraction des donnees
+	 * @param url url à extraire
+	 * @throws UrlInvalideException si l'url est invalide on lève une exception
+	 * @throws ExtractionInvalideException s'il y a une erreur lors de l'extraction on lève une exception
+	 * @throws MalformedURLException s'il y a une erreur dans le mail on lève une exception
+	 * @throws ConversionInvalideException s'il y a une erreur lors de la conversion on lève une exception
+	 * @throws JSONException si erreur survenue avec format json
+	 * @throws IOException si erreur survenue
+	 * @throws ArticleInexistantException si article inexistant on lève une exception
+	 */
+	abstract void extraire(Url url) throws UrlInvalideException, ExtractionInvalideException, MalformedURLException, ConversionInvalideException, IOException, JSONException, ArticleInexistantException;
+
+	/**
+	 * A partir de l'url donnee, recupere le contenu de la page en json
+	 * @param url
+	 * @return String
+	 * @throws ExtractionInvalideException
+	 */
+	abstract String recupContenu(URL url) throws ExtractionInvalideException;
 
 	/**
 	 * A partir d'une Url, determine de combien de lignes et de colonnes
@@ -52,6 +99,7 @@ public abstract class Donnee extends Thread{
 	 * @throws UrlInvalideException si l'url est invalide on leve une exception
 	 * @throws ExtractionInvalideException si il y a un probleme d'extraction, on leve une exception
 	 */
+
 	public void nbLignesColonnes(Elements wikitables) throws MalformedURLException, UrlInvalideException, ExtractionInvalideException {
 		nbTableaux = wikitables.size();
 		// On parcoure l'ensemble des tableaux de la page
@@ -85,10 +133,8 @@ public abstract class Donnee extends Thread{
 		}
 
 		Elements rowspans = wikitable.getElementsByAttribute("rowspan");
-
 		// nombre de lignes total ajoutees par les rowspans	
 		int totalRowspans = getNbLignesAjouteesRowspans(rowspans);
-
 		//nbLignesColonnes[0] = nbLignes + totalRowspans;
 		//nbLignesColonnes[1] = nbColonnesMax+1;
 		//TODO Code review
@@ -127,27 +173,6 @@ public abstract class Donnee extends Thread{
 		return totalColspans;
 	}
 
-	/**
-	 * Extraction des donnees
-	 * @param url url à extraire
-	 * @throws UrlInvalideException si l'url est invalide on lève une exception
-	 * @throws ExtractionInvalideException s'il y a une erreur lors de l'extraction on lève une exception
-	 * @throws MalformedURLException s'il y a une erreur dans le mail on lève une exception
-	 * @throws ConversionInvalideException s'il y a une erreur lors de la conversion on lève une exception
-	 * @throws JSONException si erreur survenue avec format json
-	 * @throws IOException si erreur survenue
-	 * @throws ArticleInexistantException si article inexistant on lève une exception
-	 */
-	abstract void extraire(Url url) throws UrlInvalideException, ExtractionInvalideException, MalformedURLException, ConversionInvalideException, IOException, JSONException, ArticleInexistantException;
-
-	/**
-	 * A partir de l'url donnee, recupere le contenu de la page en json
-	 * @param url
-	 * @return String
-	 * @throws ExtractionInvalideException
-	 */
-	abstract String recupContenu(URL url) throws ExtractionInvalideException;
-
 
 	/**
 	 * On verifie que la page demandee contient bien un article
@@ -166,31 +191,6 @@ public abstract class Donnee extends Thread{
 		}
 	}
 
-	/**
-	 * Verification de la presence de tableaux
-	 * @return boolean
-	 * @throws ExtractionInvalideException si erreur à l'extraction on lève une exception
-	 */
-	abstract boolean pageComporteTableau() throws ExtractionInvalideException;
 
-	/**
-	 * Récupération du nombre de tableau
-	 * @return le nombre de tableauK
-	 */
-	public abstract int getNbTableaux();
 
-	/**
-	 * Demarre le chronometre en back
-	 */
-	public void startTimer(){
-		this.tempsOriginal = System.currentTimeMillis();
-	}
-
-	/**
-	 * Donne le temps du chronometre a l'instant T
-	 * @return long
-	 */
-	public long getTime(){
-		return System.currentTimeMillis() - tempsOriginal;
-	}
 }

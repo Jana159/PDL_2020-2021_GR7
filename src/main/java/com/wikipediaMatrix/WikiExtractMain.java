@@ -1,6 +1,7 @@
 package com.wikipediaMatrix;
 
 import com.wikipediaMatrix.exception.*;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,6 +18,7 @@ import java.util.Set;
  *
  */
 public class WikiExtractMain {
+	private static Logger logger = Logger.getLogger(WikiExtractMain.class);
 
 	private static int nbTablesHtml;
 	private static int nbColonnesHtml;
@@ -26,13 +28,12 @@ public class WikiExtractMain {
 	private static int nbColonnesWikitext;
 	private static int nbLignesWikitext;
 	private static long tempsExeWikitext;
-//	private static final Logger LOG = LogManager.getLogger(WikiExtractMain.class);
 
 	public static void main(String[] args) throws MalformedURLException, IOException, UrlInvalideException, ExtractionInvalideException, ConversionInvalideException, ArticleInexistantException, ResultatEstNullException, InterruptedException {
 
 		Scanner entree = new Scanner(System.in);
 		String choix = "";
-		System.out.println("Quel type d'extraction voulez-vous realiser ? Entrez H pour HTML, W pour WIKITEXT ou bien X pour les deux en meme temps.");
+		logger.info("Quel type d'extraction voulez-vous realiser ? Entrez H pour HTML, W pour WIKITEXT ou bien X pour les deux en meme temps.");
 
 		if(entree.hasNextLine()) {
 			choix = entree.nextLine();
@@ -48,7 +49,7 @@ public class WikiExtractMain {
 			lancerDoubleExtraction();
 		}
 		else {
-			System.out.println("Les seules lettres acceptees sont H, W et X !");
+			logger.info("Les seules lettres acceptees sont H, W et X !");
 		}
 		entree.close();
 	}
@@ -65,7 +66,7 @@ public class WikiExtractMain {
 	public static void lancerDoubleExtraction() throws UrlInvalideException, IOException, ResultatEstNullException, InterruptedException {
 		double urlActuelle = 1.0;
 		for (Url urlValide : getUrlValides()) {
-			System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
+			logger.info(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 			Donnee_Html donnee_Html = new Donnee_Html();
 			donnee_Html.setUrl(urlValide);
 			donnee_Html.start();
@@ -86,7 +87,7 @@ public class WikiExtractMain {
 		double urlActuelle = 1.0;
 		if (isHtml) {
 			for (Url urlValide : getUrlValides()) {
-				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
+				logger.info(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 				Donnee_Html donnee_Html = new Donnee_Html();
 				donnee_Html.setUrl(urlValide);
 				donnee_Html.start();
@@ -98,7 +99,7 @@ public class WikiExtractMain {
 		}
 		else {
 			for (Url urlValide : getUrlValides()) {
-				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
+				logger.info(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 				Donnee_Wikitable donnee_Wikitable= new Donnee_Wikitable();
 				donnee_Wikitable.setUrl(urlValide);
 				donnee_Wikitable.start();
@@ -141,20 +142,11 @@ public class WikiExtractMain {
 	
 	public static void getStatistiques() {
 		long tempsExeTotal = (System.currentTimeMillis());
-		System.out.println("Temps d'execution : " + tempsExeTotal/1000 + " secondes");
-		System.out.println("-----------STATISTIQUES-----------");
-		System.out.println("- HTML - Temps d'execution : " + tempsExeHtml/1000 + " secondes.");
-		System.out.println("Nombre de tableaux parsés: " + nbTablesHtml + ", lignes parsées : " + nbLignesHtml + ", colonnes parsées : " + nbColonnesHtml);
-		System.out.println("- WIKITEXT - Temps d'execution : " + tempsExeWikitext/1000 + " secondes.");
-		System.out.println("Nombre de tableaux parsés: " + nbTablesWikitext + ", lignes parsées : " + nbLignesWikitext + ", colonnes parsées : " + nbColonnesWikitext);
+		logger.info("Temps d'execution : " + tempsExeTotal/1000 + " secondes");
+		logger.info("-----------STATISTIQUES-----------");
+		logger.info("- HTML - Temps d'execution : " + tempsExeHtml/1000 + " secondes.");
+		logger.info("Nombre de tableaux parsés: " + nbTablesHtml + ", lignes parsées : " + nbLignesHtml + ", colonnes parsées : " + nbColonnesHtml);
+		logger.info("- WIKITEXT - Temps d'execution : " + tempsExeWikitext/1000 + " secondes.");
+		logger.info("Nombre de tableaux parsés: " + nbTablesWikitext + ", lignes parsées : " + nbLignesWikitext + ", colonnes parsées : " + nbColonnesWikitext);
 	}
-
-//	Logger example
-//	=====================================================
-//	 	LOG.debug("This Will Be Printed On Debug");
-//        LOG.info("This Will Be Printed On Info");
-//        LOG.warn("This Will Be Printed On Warn");
-//        LOG.error("This Will Be Printed On Error");
-//        LOG.fatal("This Will Be Printed On Fatal");
-//	=====================================================
 }

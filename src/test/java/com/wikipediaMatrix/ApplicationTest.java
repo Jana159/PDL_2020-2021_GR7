@@ -102,6 +102,7 @@ public class ApplicationTest {
     public void wikitextExtractorTest() throws MalformedURLException, InterruptedException {
         setup();
         assertTrue(ownUrl.estTitreValide());
+        
         Donnee_Wikitable donneeWikitable = new Donnee_Wikitable();
         donneeWikitable.setUrl(ownUrl);
         donneeWikitable.start();

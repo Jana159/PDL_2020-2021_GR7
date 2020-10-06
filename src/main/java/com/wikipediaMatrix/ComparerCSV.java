@@ -31,21 +31,6 @@ public class ComparerCSV {
 		this.wikitable = wikitable;
 	}
 
-	/**
-"	 * Recupere des statistiques sur les deux modes d'extraction - Wikitext et HTML -
-	 * dans l'optique de determier lequel est le meilleur.
-	 */
-	public void informationsExtraction() {
-		this.tempsExeHtml = html.getTime();
-		this.tempsExeWikitable = wikitable.getTime();
-		this.lignesHtml = html.getLignesEcrites();
-		this.lignesWikitable = wikitable.getLignesEcrites();
-		this.colonnesHtml = html.getColonnesEcrites();
-		this.colonnesWikitable = wikitable.getColonnesEcrites();
-		this.tablesHtml = html.getNbTableaux();
-		this.tablesWikitext = wikitable.getNbTableaux();
-	}
-	
 	public Donnee_Html getHtml() throws ResultatEstNullException {
 		if(html == null) throw new ResultatEstNullException("tablesHtml n'est pas de type int");
 		return html;
@@ -94,5 +79,19 @@ public class ComparerCSV {
 	public int getTablesWikitable() throws ResultatEstNullException {
 		if(tablesWikitext != tablesWikitext) throw new ResultatEstNullException("tablesWikitext n'est pas de type int");
 		return tablesWikitext;
+	}
+	/**
+	 "	 * Recupere des statistiques sur les deux modes d'extraction - Wikitext et HTML -
+	 * dans l'optique de determier lequel est le meilleur.
+	 */
+	public void informationsExtraction() {
+		this.tempsExeHtml = html.getTime();
+		this.tempsExeWikitable = wikitable.getTime();
+		this.lignesHtml = html.getLignesEcrites();
+		this.lignesWikitable = wikitable.getLignesEcrites();
+		this.colonnesHtml = html.getColonnesEcrites();
+		this.colonnesWikitable = wikitable.getColonnesEcrites();
+		this.tablesHtml = html.getNbTableaux();
+		this.tablesWikitext = wikitable.getNbTableaux();
 	}
 }

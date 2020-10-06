@@ -2,6 +2,7 @@ package com.wikipediaMatrix;
 
 import com.wikipediaMatrix.exception.ArticleInexistantException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -17,6 +18,8 @@ import java.util.regex.Pattern;
  *
  */
 public class Url {
+
+	private static Logger logger = Logger.getLogger(Url.class);
 
 	private URL url;
 	private String titre;
@@ -38,6 +41,33 @@ public class Url {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Recuperer l'URL
+	 * @return String url
+	 */
+	public URL getURL() {
+		return this.url;
+	}
+
+	/**
+	 * Recuperer le titre de la page url
+	 * @return String titre
+	 */
+	public String getTitre(){
+		return this.titre.toString();
+	}
+
+	/**
+	 * Recuperer la langue de la page url
+	 * @return String langue
+	 */
+	public String getLangue() {
+		return this.langue;
+	}
+
+	public String getOldid() {
+		return oldid;
+	}
 
 	/**
 	 * Verification de l'url (provient bien du site Wikipedia) et de la langue de la page
@@ -45,6 +75,7 @@ public class Url {
 	 * @return true si la langue est en francais ou en anglais, false sinon
 	 * @throws UrlInvalideException si l'url est invalide
 	 */
+
 	public boolean estPageWikipedia() throws UrlInvalideException {
 		try {
 
@@ -67,7 +98,7 @@ public class Url {
 		titre = url.toString().substring(url.toString().lastIndexOf('/')+1);
 		// "\p{Graph}" -> chiffre, lettre, ponctuation
 		if (!titre.matches("^[\\p{Graph}å\\–]+$")) {
-			System.out.println(new MalformedURLException("Titre de la page invalide"));
+			logger.info(new MalformedURLException("Titre de la page invalide"));
 			return false;
 		}
 		Pattern patternCell = Pattern.compile("(.)*title=((.)+)&(.)*");
@@ -83,9 +114,6 @@ public class Url {
 		return true;
 	}
 
-	public String getOldid() {
-		return oldid;
-	}
 
 	/**
 	 * Tester une connexion avec le serveur HTTP afin de savoir si l'url renvoie bien a une page existante
@@ -114,30 +142,8 @@ public class Url {
 	 * @throws MalformedURLException si url n'est pas correcte
 	 */
 	public boolean estUrlValide() throws UrlInvalideException, MalformedURLException {
-		return estTitreValide() && estPageWikipedia() /*&& testerConnexionHTTP()*/;
+		return estTitreValide() && estPageWikipedia();
 	}
 
-	/**
-	 * Recuperer l'URL 
-	 * @return String url
-	 */
-	public URL getURL() {
-		return this.url;
-	}
 
-	/**
-	 * Recuperer le titre de la page url
-	 * @return String titre
-	 */
-	public String getTitre(){
-		return this.titre.toString();
-	}
-
-	/**
-	 * Recuperer la langue de la page url
-	 * @return String langue
-	 */
-	public String getLangue() {
-		return this.langue;
-	}
 }

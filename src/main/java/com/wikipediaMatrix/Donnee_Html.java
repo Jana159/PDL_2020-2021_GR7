@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.URL;
@@ -20,6 +21,8 @@ import java.util.List;
  *
  */
 public class Donnee_Html extends Donnee {
+	private static Logger logger = Logger.getLogger(Donnee_Html.class);
+
 	/**
 	 * Le HTML de la page wikipedia
 	 */
@@ -67,7 +70,33 @@ public class Donnee_Html extends Donnee {
 	public void setUrl(Url url) {
 		this.url = url;
 	}
-	
+	/**
+	 * Renvoie le nombre de tableaux du fichier.
+	 */
+	@Override
+	public int getNbTableaux() {
+		return this.nbTableauxExtraits;
+	}
+	/**
+	 * Renvoie le nombre de colonnes ecrites dans le csv
+	 * a partir du parsing d'une page.
+	 * @return le nombre de colonne écrite
+	 */
+	public int getColonnesEcrites() {
+		return this.colonnesEcrites;
+	}
+
+
+	/**
+	 * Renvoie le nombre de lignes ecrites dans le csv
+	 * a partir du parsing d'une page.
+	 *
+	 * @return le nombre de ligne écrites
+	 */
+	public int getLignesEcrites() {
+		return this.lignesEcrites;
+	}
+
 	/**
 	 * Lance l'execution d'un thread pour l'extraction des tableaux de la page wikipedia
 	 */
@@ -102,7 +131,7 @@ public class Donnee_Html extends Donnee {
 			URL urlExtraction = new URL("https://"+langue+".wikipedia.org/wiki/"+titre+"?action=render");
 			this.setHtml(this.recupContenu(urlExtraction));
 		} catch (ExtractionInvalideException erreurExtraction) {
-			System.out.println("ERREUR : " + erreurExtraction.toString());
+			logger.error("ERREUR : " + erreurExtraction.toString());
 			hasPage = false;
 		}
 		supprimerPointsVirgule(this.donneeHTML);
@@ -156,7 +185,7 @@ public class Donnee_Html extends Donnee {
 				writer.close();
 			}
 			catch (Exception e){
-				System.out.println("L'extraction à échouée");
+				logger.info("L'extraction à échouée");
 				writer.close();
 			}
 		}	
@@ -178,7 +207,6 @@ public class Donnee_Html extends Donnee {
 			/* Parcours des cellules de la ligne, et appel de methodes
 			gerant les colspans et rowspans si besoin */
 			for (Element cellule : cellules) {
-				//System.out.println("Ligne " + this.ligneActuelle + " ; Colonne " + this.colonneActuelle);
 				// Si on un colspan et un rowspan sur la meme cellule
 				if ((cellule.hasAttr("colspan")) && (cellule.hasAttr("rowspan"))){
 					String colspanValue = cellule.attr("colspan").replaceAll("[^0-9.]", "");
@@ -379,7 +407,7 @@ public class Donnee_Html extends Donnee {
 			return true;
 		}
 		else {
-			System.out.println(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
+			logger.info(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
 			return false;	
 		}
 	}
@@ -470,33 +498,4 @@ public class Donnee_Html extends Donnee {
 		return false;
 	}
 
-
-	/**
-	 * Renvoie le nombre de tableaux du fichier.
-	 */
-	@Override
-	public int getNbTableaux() {
-		return this.nbTableauxExtraits;
-	}
-
-
-	/**
-	 * Renvoie le nombre de colonnes ecrites dans le csv
-	 * a partir du parsing d'une page.
-	 * @return le nombre de colonne écrite
-	 */
-	public int getColonnesEcrites() {
-		return this.colonnesEcrites;
-	}
-
-
-	/**
-	 * Renvoie le nombre de lignes ecrites dans le csv 
-	 * a partir du parsing d'une page.
-	 *
-	 * @return le nombre de ligne écrites
-	 */
-	public int getLignesEcrites() {
-		return this.lignesEcrites;
-	}
 }

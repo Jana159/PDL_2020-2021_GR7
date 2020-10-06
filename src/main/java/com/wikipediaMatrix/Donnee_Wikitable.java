@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 
 /**
@@ -19,6 +20,7 @@ import org.json.JSONObject;
  */
 
 public class Donnee_Wikitable extends Donnee{
+    private static Logger logger = Logger.getLogger(Donnee_Wikitable.class);
 
     private String wikitable;
     private int lignesEcrites = 0;
@@ -47,6 +49,30 @@ public class Donnee_Wikitable extends Donnee{
 
     public String getWikitable() {
         return this.wikitable;
+    }
+
+    /**
+     * Renvoie le nombre de colonnes ecrites pour la page courante
+     * @return
+     */
+    public int getColonnesEcrites() {
+        return colonnesEcrites;
+    }
+
+    /**
+     * Renvoie le nombre de lignes ecrites pour la page courante
+     * @return
+     */
+    public int getLignesEcrites() {
+        return lignesEcrites;
+    }
+
+    /**
+     * Renvoie le nombre de tableaux detectes sur la page
+     */
+    @Override
+    public int getNbTableaux() {
+        return this.nbTableauxExtraits;
     }
 
     @Override
@@ -106,7 +132,7 @@ public class Donnee_Wikitable extends Donnee{
             wikitableVersCSV(titre,wikitable);
         }
         else {
-            System.out.println("La page " + titre + "ne permet pas d'extraction en json");
+            logger.info("La page " + titre + "ne permet pas d'extraction en json");
         }
     }
 
@@ -158,7 +184,7 @@ public class Donnee_Wikitable extends Donnee{
                 wikitableVersCSVAux2(table, titre, i + 1);
                 i++;
             } catch (Exception e) {
-                System.out.println("Ectraction wikitext a échoué");
+                logger.info("Ectraction wikitext a échoué");
             }
         }
     }
@@ -505,33 +531,10 @@ public class Donnee_Wikitable extends Donnee{
     @Override
     public boolean pageComporteTableau() throws ExtractionInvalideException {
         if(!wikitable.contains("{|")){
-            System.out.println(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
+            logger.info(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
             return false;
         }
         return true;
     }
 
-    /**
-     * Renvoie le nombre de colonnes ecrites pour la page courante
-     * @return
-     */
-    public int getColonnesEcrites() {
-        return colonnesEcrites;
-    }
-
-    /**
-     * Renvoie le nombre de lignes ecrites pour la page courante
-     * @return
-     */
-    public int getLignesEcrites() {
-        return lignesEcrites;
-    }
-
-    /**
-     * Renvoie le nombre de tableaux detectes sur la page
-     */
-    @Override
-    public int getNbTableaux() {
-        return this.nbTableauxExtraits;
-    }
 }

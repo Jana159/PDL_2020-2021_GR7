@@ -181,7 +181,6 @@ public class CSVValidator {
                         if (!item1.equals(item2)){
                             return false;
                         }
-
                     }
 
                 }
