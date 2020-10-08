@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -21,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 public class ProofTest {
 
         String BASE_WIKIPEDIA_URL = "output/proof.txt";
+    String BASE_WIKIPEDIA_URL_HTML = "output/proof_html.txt";
     /**
      * Test de la validité du format du csv généré par l'extracteur Html
      *
@@ -32,15 +34,18 @@ public class ProofTest {
 
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
+            BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL_HTML));
             String url;
             boolean bool;
 
             while ((url = br.readLine()) != null) {
                 bool = testHTMLUrl(url);
                 System.out.println("Vérification de : " + url + " : " + bool);
+if(bool == true){
+    assertTrue(bool);
 
-                assertTrue(bool);
+}
+
             }
 
 
