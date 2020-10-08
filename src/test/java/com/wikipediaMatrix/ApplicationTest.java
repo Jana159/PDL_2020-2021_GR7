@@ -77,10 +77,10 @@ public class ApplicationTest {
     }
 
     @Test
-    @Ignore
+   // @Ignore
     @DisplayName("Test si l'extracteur Html et Wikitext extraient le même nombre de tableau pour une Url")
     public void testGetNbTableaux() throws IOException, InterruptedException {
-        String BASE_WIKIPEDIA_URL = "output/large_url_test.txt";
+        String BASE_WIKIPEDIA_URL = "output/url_test.txt";
         BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
         String url;
         while ((url = br.readLine()) != null) {
@@ -93,7 +93,8 @@ public class ApplicationTest {
             donneeWikitable.setUrl(wikiUrl);
             donneeWikitable.start();
             donneeWikitable.join();
-            assert donneeHtml.getNbTableaux() == donneeWikitable.getNbTableaux();
+          //  assert donneeHtml.getNbTableaux() == donneeWikitable.getNbTableaux();
+            assertEquals(donneeHtml.getNbTableaux() ,  donneeWikitable.getNbTableaux());
         }
     }
 
