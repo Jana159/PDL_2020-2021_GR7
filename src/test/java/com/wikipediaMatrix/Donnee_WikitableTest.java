@@ -44,11 +44,11 @@ public class Donnee_WikitableTest {
 	 * @throws ExtractionInvalideException
 	 */
 	@Test
-	@Ignore
+	//@Ignore
 	public void supprDonneesInutiles() throws ExtractionInvalideException {
 		Donnee_Wikitable donnee_WikitextTest = new Donnee_Wikitable();
 		String test = donnee_WikitextTest.wikitableReplace("scope=col;style=\"text-align:center\"align=\"center\"|&nbsp;<br /></center>|-/");
-		assertEquals(test, ", | -/");
+		assertEquals(test, ",| | -/");
 	}
 	
 	/**
