@@ -119,8 +119,8 @@ public class UrlTest {
 	 * @throws IOException si l'url est incorrecte
 	 */
 	@Test
-	@Ignore
-	public void testerConnexion336Urls() throws UrlInvalideException, IOException {
+	//@Ignore
+	public void testerConnexion336Urls() throws  IOException {
 		String BASE_WIKIPEDIA_URL = "output/url_file.txt";
 		BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
 	    String url;
@@ -132,11 +132,12 @@ public class UrlTest {
 		    	articleExistant++;
 			} catch (ArticleInexistantException e) {
 				articleInexistant++;
+				e.printStackTrace();
 			}
 	    }
 	    br.close();
-	    assertEquals(2, articleInexistant);
-	    assertEquals(2, articleExistant);
+	    assertEquals(1, articleInexistant);
+	    assertEquals(1, articleExistant);
 	    System.out.println("URLs sans article : " + articleInexistant);
 	}
 }
