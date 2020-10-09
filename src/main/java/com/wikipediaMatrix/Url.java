@@ -50,7 +50,8 @@ public class Url {
 
 			String debutURL = url.toString().substring(0, url.toString().lastIndexOf('/')+1);;
 			if (!debutURL.matches("https://(fr|en).wikipedia.org/(w|wiki)/")) {
-				throw new UrlInvalideException("URL non prise en charge");
+				//throw new UrlInvalideException("URL non prise en charge");
+				return false;
 			}
 			langue = url.toString().substring(8, url.toString().indexOf('.'));
 		} catch (Exception e) {}

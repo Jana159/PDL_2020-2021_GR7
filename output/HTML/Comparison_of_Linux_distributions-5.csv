@@ -22,7 +22,7 @@ Mandriva Linux One; 700; 128 to 768; Yes; Yes; Yes; Yes
 Manjaro Linux; 473 to 2,200[ 207]; 256 to 1,024; Yes; Yes; Yes; Yes
 MEPIS; 700 to 4,000; 128 to 512; Yes; Yes; Yes; Yes
 Musix GNU+Linux; 2,000; ?; No; Yes; Yes; Yes
-Nanolinux; 18; â‰ˆ64; Yes; Yes; Yes; Yes
+Nanolinux; 18; ≈64; Yes; Yes; Yes; Yes
 openGEU; 700; 192 to 512; Yes; ; Yes; 
 openSUSE (Not 42.1); 700; 128 to 768; Yes; Yes; Yes; Yes
 OpenWrt; min  4; min  16; No; No; No; No
@@ -41,7 +41,7 @@ Slax; 200; 96 to 320; Yes; Yes; ; Yes
 Solus; 1,200; 1,024; No; Yes; Yes; Yes
 SystemRescueCD; 459; ; Yes; Yes; Yes; Yes
 SliTaz GNU/Linux; 50; 48 to 256; Yes; Yes; Yes; Yes
-Tails; â‰ˆ900; â‰ˆ1,024; No; Yes; Yes; Yes (when run from DVD)
+Tails; ≈900; ≈1,024; No; Yes; Yes; Yes (when run from DVD)
 Tiny Core Linux; 16; 46; Yes; Yes; Yes; Yes
 Tiny SliTaz; 1.44; 4; Yes; Yes; By SliTaz; By SliTaz
 Trisquel; 1,500[ 211]; 384; Yes; Yes; Yes; Yes

@@ -27,11 +27,11 @@ public class UrlTest {
 	 * @throws UrlInvalideException si l'url est invalide
 	 * @throws MalformedURLException si l'url n'est pas correcte
 	 */
-	@Test(expected = UrlInvalideException.class)
-	@Ignore
+	@Test()
 	public void detectionLanguesNonGeree() throws UrlInvalideException, MalformedURLException {
 		Url url = new Url(new URL("https://fy.wikipedia.org/wiki/Espagne"));
 		url.estUrlValide();
+		assertTrue(!url.estPageWikipedia()); /*les langues gerees par nos pages wikipedia sont uniquement fr ou en */
 	}
 	
 	/**
@@ -39,11 +39,11 @@ public class UrlTest {
 	 * @throws UrlInvalideException si l'url est invalide
 	 * @throws MalformedURLException si l'url n'est pas correcte
 	 */
-	@Test(expected = UrlInvalideException.class)
-	@Ignore
+	@Test()
 	public void pageNonWikipedia() throws UrlInvalideException, MalformedURLException {
 		Url url = new Url(new URL("https://www.google.com"));
 		url.estUrlValide();
+		assertTrue(!url.estPageWikipedia()); /* verifie que la page n'est pas wikipedia */
 	}
 
 	/**
@@ -74,11 +74,11 @@ public class UrlTest {
 	 * @throws UrlInvalideException si l'url est invalide
 	 * @throws MalformedURLException si l'url est incorrecte
 	 */
-	@Test(expected = UrlInvalideException.class)
-	@Ignore
+	@Test()
 	public void detectionLlanguesIinexistante() throws UrlInvalideException, MalformedURLException {
 		Url url = new Url(new URL("https://.wikipedia.org/wiki/Espagne"));
 		url.estUrlValide();
+		assertTrue(!url.estPageWikipedia()); /*les langues gerees par nos pages wikipedia sont uniquement fr ou en */
 	}
 	
 	/**
@@ -98,9 +98,8 @@ public class UrlTest {
 	 * @throws IOException si l'url est incorrecte
 	 */
 	@Test
-	@Ignore
 	public void verification336UrlsValides() throws UrlInvalideException, IOException   {
-		String BASE_WIKIPEDIA_URL = "output/url_file.txt";
+		String BASE_WIKIPEDIA_URL = "output/large_url_test.txt";
 		BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
 	    String url;
 	    int nurl = 0;
@@ -110,7 +109,7 @@ public class UrlTest {
 		    nurl++;
 	    }
 	    br.close();
-	    assertEquals(4, nurl);
+	    assertEquals(336, nurl);
 	}
 	
 	/**
