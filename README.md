@@ -155,6 +155,7 @@ git config --global user.email johndoe@example.com
 * **Rebecca EHUA** - *Whole project* - [Rebecca_Ehua](https://github.com/kouassives)
 
 ##Project Context
+
 This module takes place at the University of Rennes 1, ISTIC, in Master 1 (MIAGE). 
 The objective of PDL is to carry out a software project with open technologies and data. 
 There are many challenges to overcome, requiring skills in project management, modeling, and programming.
