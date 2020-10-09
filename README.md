@@ -152,7 +152,7 @@ git config --global user.email johndoe@example.com
 * **Lassana MAKADJI** - *Whole project* - [Lassana_Makadji](https://github.com/makadjilassana)
 * **Rahima KONE** - *Whole project* - [Rahima_Koné](https://github.com/chemy8)
 * **Mariem ROUISSI** - *Whole project* - [Mariem_Rouissi](https://github.com/Mrouissi)
-* **Rebecca EHUA** - *Whole project* - [Rebecca_Ehua](https://github.com/kouassives)
+* **Rebecca EHUA** - *Whole project* - [Rebecca_Ehua](https://github.com/CodeusedeReve)
 
 ##Project Context
 
