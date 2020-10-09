@@ -75,6 +75,7 @@ Folders:
   1. .gitignore, containing patterns of files that git should not push.
   2. INSTALL.md containing the install guide
   3. DESIGN.md cointaining projects' scope and its UML Model.
+  4.EVALUATION.md containing remarks on previous versions.
   2. LICENSE.md containing our project's license : the MIT license.
   3. pom.xml, containing our project's dependencies.
   
@@ -140,6 +141,13 @@ git config --global user.email johndoe@example.com
 * **Laeba  TALAT** - *Whole project* - [Laeba Talat](https://github.com/Laeba)
 * **Yves KOUASSI** - *Whole project* - [Yves Kouassi](https://github.com/kouassives)
 * **Nguyen-Anh CU** - *Whole project* - [Nguyen-Anh CU](https://github.com/NguyenAnhCu)
+## Contributors
+
+* **Lassana MAKADJI** - *Whole project* - [Lassana_Makadji](https://github.com/makadjilassana)
+* **Rahima KONE** - *Whole project* - [Rahima_Koné](https://github.com/chemy8)
+* **Mariem ROUISSI** - *Whole project* - [Mariem_Rouissi](https://github.com/Mrouissi)
+* **Rebecca EHUA** - *Whole project* - [Rebecca_Ehua](https://github.com/kouassives)
+
 
 ## License
 
