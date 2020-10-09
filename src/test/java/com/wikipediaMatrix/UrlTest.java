@@ -118,7 +118,7 @@ public class UrlTest {
 	 * @throws IOException si l'url est incorrecte
 	 */
 	@Test
-	@Ignore
+	//@Ignore
 	public void testerConnexion336Urls() throws  IOException {
 		String BASE_WIKIPEDIA_URL = "output/url_file.txt";
 		BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
