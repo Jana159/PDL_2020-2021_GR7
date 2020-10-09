@@ -46,7 +46,7 @@ SUSE Linux; Free, and nonfree; 24,094; 11,385; YaST, Zypper; RPM; YaST; Yes; ?; 
 Tiny Core Linux; Free, and nonfree; 25,160; ?; ab, tce-load; tcz; tc-install, core2usb; Yes; ?; ?
 Tiny SliTaz; Free, and nonfree; 50; ?; Web site[ 203]; tazpkg; ; No; ?; iPXE
 Trisquel; Free only; 52,748[ 204]; ?; APT; .deb; Ubiquity; Yes; Yes; ?
-TurnKey GNU/Linux; Free, and nonfree; [ q] [ 180] (plus â‰ˆ30 custom packages); 21,041[ r] (currently TurnKey only supplies source code for custom packages); APT; .deb; DI-Live (custom fork of Debian Installer); No; No; No
+TurnKey GNU/Linux; Free, and nonfree; [ q] [ 180] (plus ≈30 custom packages); 21,041[ r] (currently TurnKey only supplies source code for custom packages); APT; .deb; DI-Live (custom fork of Debian Installer); No; No; No
 Ubuntu, Kubuntu, Xubuntu; Free, and nonfree; [ s] [ 180]; 24,474[ t]; APT; .deb; Ubiquity; Yes; Yes; PXE
 Ututo; Free only; 5,000; ?; UTUTO Package Manager; ebuild; ?; ?; No; No
 Vector Linux; Free, and nonfree; ?; ?; slapt-get, gslapt, installpkg; tgz; ; Yes; ?; ?
