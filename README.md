@@ -75,6 +75,7 @@ Folders:
   1. .gitignore, containing patterns of files that git should not push.
   2. INSTALL.md containing the install guide
   3. DESIGN.md cointaining projects' scope and its UML Model.
+  4.EVALUATION.md containing remarks on previous versions.
   2. LICENSE.md containing our project's license : the MIT license.
   3. pom.xml, containing our project's dependencies.
   
@@ -88,6 +89,7 @@ Folders:
 ## Running the tests
 
 On IntelliJ : Right click on your project, then choose Run 'All Tests'
+ To run the test with 336 URL choose the file BenchTest.java
 
 ## Parsing wikitables
 
@@ -111,6 +113,11 @@ Moreover, many times, extraction via wikitext compare to those via html do not g
 
 Some little problems have been found as when a false URL is given, it pops out an error without precising which url/title is making trouble. When a page does not have any table it is not said clearly.
 Until then there is no method to check if the CSV is good, so this is a new method considered. A method that compares two CSVs is well under consideration. 
+Also user can't choice the URL , we put a default URL in the main for extraction
+
+##Future function
+choice of URL by user
+Another extractor more perform in other langage
 
 ## Built With
 
@@ -140,6 +147,21 @@ git config --global user.email johndoe@example.com
 * **Laeba  TALAT** - *Whole project* - [Laeba Talat](https://github.com/Laeba)
 * **Yves KOUASSI** - *Whole project* - [Yves Kouassi](https://github.com/kouassives)
 * **Nguyen-Anh CU** - *Whole project* - [Nguyen-Anh CU](https://github.com/NguyenAnhCu)
+## Contributors
+
+* **Lassana MAKADJI** - *Whole project* - [Lassana_Makadji](https://github.com/makadjilassana)
+* **Rahima KONE** - *Whole project* - [Rahima_Koné](https://github.com/chemy8)
+* **Mariem ROUISSI** - *Whole project* - [Mariem_Rouissi](https://github.com/Mrouissi)
+* **Rebecca EHUA** - *Whole project* - [Rebecca_Ehua](https://github.com/CodeusedeReve)
+
+##Project Context
+
+This module takes place at the University of Rennes 1, ISTIC, in Master 1 (MIAGE). 
+The objective of PDL is to carry out a software project with open technologies and data. 
+There are many challenges to overcome, requiring skills in project management, modeling, and programming.
+This scenario should make it possible to better understand and apprehend the difficulty of developing software in an extremely concrete context. 
+Software development technics and tools (git, github, Maven, JUnit, etc.) well known to the industry will be used. 
+Technological choices will also have to be made.
 
 ## License
 
