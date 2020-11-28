@@ -1,10 +1,5 @@
-Model; Launch; Fab (nm); Bus interface; Core clock (MHz); Memory clock (MHz); Hardware T& L; Core config1; Fillrate; Fillrate; Memory; Memory; Memory; Memory; API compliance (version); API compliance (version); Notes
-Model; Launch; Fab (nm); Bus interface; Core clock (MHz); Memory clock (MHz); Hardware T& L; Core config1; Pixel (GP/s); Texture (GT/s); Size (MB); Bandwidth (GB/s); Bus type; Bus width (bit); Direct3D; OpenGL; Notes
-Rage LT (Rage II); Nov 1996; 500; PCI; 60; 66; No; 0:1:1:1; 0.06; 0.06; 4; 0.53; EDO, SDR, SGR; 64; 5; N/A; 
-Rage LT Pro (Rage Pro); Nov 1997; 350; AGP, PCI; 75; 100; No; 0:1:1:1; 0.075; 0.075; 0.80; 6; EDO, SDR, SGR; 64; 1.1; Motion Compensation; 
-Rage Mobility M/P (Rage Pro); Nov 1998; 250; AGP, PCI; 90; Unknown; No; 0:1:1:1; 8; Unknown; SDR, SGR; Unknown; Unknown; 64; M had 4  MB of integrated SDRAM, P had none. IDCT, Motion Compensation.; 
-Rage Mobility M1 (Rage Pro); Feb 1999; 250; AGP, PCI; 90; 0.18; No; 0:1:1:1; 8; 90; 0.72; M1 had 8  MB of integrated SDRAM, P had none. IDCT, Motion Compensation.; 64; 
-Rage 128 GL; Aug 1998; 250; AGP, PCI; 103; 103; No; 0.206; 6; 1.2; 0.206; 32; 1.65; ; 
-Rage Mobility 128 (Rage 128 Pro); Oct 1999; 250; AGP, PCI; 0:2:2:2; 105; No; 0.21; 6; 1.2; 128; 2.28; IDCT, Motion Compensation; 
-Rage Mobility M3 (AGP 4x) (Rage 128 Pro); Oct 1999; 250; AGP, PCI; 0:2:2:2; 105; No; 0.21; 6; 1.2; 128; 2.28; M3 had 8  MB of integrated SDRAM, IDCT, Motion Compensation.; 
-Rage Mobility M4 (AGP 4x) (Rage 128 Pro); Oct 1999; 250; AGP, PCI; 0:2:2:2; 105; No; 0.21; 6; 1.2; 128; 32; 2.28; M4 had 16  MB of integrated SDRAM, IDCT, Motion Compensation.; 
+Model (codename); Release Date &   Price; Architecture &   Fab; Transistors &   Die Size; Core; Core; Fillrate[ a] [ b] [ c]; Fillrate[ a] [ b] [ c]; Processing power[ a] [ d] (GFLOPS); Processing power[ a] [ d] (GFLOPS); Processing power[ a] [ d] (GFLOPS); Memory; Memory; Memory; Memory; TBP; Bus interface
+Model (codename); Release Date &   Price; Architecture &   Fab; Transistors &   Die Size; Config[ e]; Clock[ a] (MHz); Texture (GT/s); Pixel (GP/s); Half; Single; Double; Size (GB); Bandwidth (GB/s); Bus  type &   width; Clock (MT/s); TBP; Bus interface
+Radeon  RX  6800 (Navi 21) [ 137] [ 138] [ 139]; November 18, 2020 $579 USD; RDNA 2 TSMC  N7; 26.8Ã—109 519.8 mm2; 3840:240:96 60 CU; 1700 2105; 408 505.2; 163.2 202.1; 26,112 32,333; 13,056 16,166; 816 1,010.4; 16[ f]; 512[ g]; GDDR6 256-bit; 16000; 250  W; PCIe 4.0
+Radeon  RX  6800  XT (Navi 21) [ 137] [ 138] [ 140]; November 18, 2020 $649 USD; RDNA 2 TSMC  N7; 26.8Ã—109 519.8 mm2; 4608:288:128 72 CU; 1825 2250; 525.6 648; 233.6 288; 33,638 41,472; 16,819 20,736; 1,051.2 1,296; 16[ f]; 512[ g]; GDDR6 256-bit; 16000; PCIe 4.0
+Radeon  RX  6900  XT (Navi 21) [ 137] [ 138] [ 141]; December 8, 2020 $999 USD; RDNA 2 TSMC  N7; 26.8Ã—109 519.8 mm2; 5120:320:128 80 CU; 1825 2250; 584 720; 233.6 288; 37,376 46,080; 300  W; 18,688 23,040; 16[ f]; 512[ g]; GDDR6 256-bit; 16000; 1,168 1,440; PCIe 4.0

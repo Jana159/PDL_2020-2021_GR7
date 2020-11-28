@@ -32,20 +32,20 @@ public class WikiExtractMain {
 
 		Scanner entree = new Scanner(System.in);
 		String choix = "";
-		System.out.println("Quel type d'extraction voulez-vous realiser ? Entrez H pour HTML, W pour WIKITEXT ou bien X pour les deux en meme temps.");
-
-		if(entree.hasNextLine()) {
-			choix = entree.nextLine();
+		//system.out.println("Quel type d'extraction voulez-vous realiser ? Entrez H pour HTML, W pour WIKITEXT ou bien X pour les deux en meme temps.");
+		System.out.println(args[1].equalsIgnoreCase("H"));
+		String url= args[0];
+		System.out.println(url);
+		if(args[1].equalsIgnoreCase("H")) {
+			System.out.println("Done H !");
+			lancerSimpleExtraction(true, url);
+			System.out.println("Done !");
 		}
-
-		if(choix.equals("H")) {
-			lancerSimpleExtraction(true);
-		}
-		else if (choix.equals("W")) {
-			lancerSimpleExtraction(false);
+		else if (args[1].equalsIgnoreCase("W")) {
+			lancerSimpleExtraction(false, args[0]);
 		}
 		else if (choix.equals("X")) {
-			lancerDoubleExtraction();
+			lancerDoubleExtraction(args[0]);
 		}
 		else {
 			System.out.println("Les seules lettres acceptees sont H, W et X !");
@@ -62,10 +62,11 @@ public class WikiExtractMain {
 	 * @throws ResultatEstNullException si le resultat est null
 	 * @throws InterruptedException si erreur survenue
 	 */
-	public static void lancerDoubleExtraction() throws UrlInvalideException, IOException, ResultatEstNullException, InterruptedException {
+	public static void lancerDoubleExtraction(String url) throws UrlInvalideException, IOException,
+			ResultatEstNullException, InterruptedException {
 		double urlActuelle = 1.0;
-		for (Url urlValide : getUrlValides()) {
-			System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
+		for (Url urlValide : getUrlValides(url)) {
+			//System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 			Donnee_Html donnee_Html = new Donnee_Html();
 			donnee_Html.setUrl(urlValide);
 			donnee_Html.start();
@@ -80,15 +81,18 @@ public class WikiExtractMain {
 		getStatistiques();
 	}
 
-	public static void lancerSimpleExtraction(boolean isHtml) throws MalformedURLException, IOException, UrlInvalideException, InterruptedException, ResultatEstNullException {
+	public static void lancerSimpleExtraction(boolean isHtml , String url) throws MalformedURLException, IOException, UrlInvalideException, InterruptedException, ResultatEstNullException {
 		Donnee_Html fakeDonneeHtml = new Donnee_Html();
 		Donnee_Wikitable fakeDonneeWikitable = new Donnee_Wikitable();
 		double urlActuelle = 1.0;
+		System.out.printf("Extract ==> ", url);
 		if (isHtml) {
-			for (Url urlValide : getUrlValides()) {
-				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
+			for (Url urlValide : getUrlValides(url)) {
+				System.out.printf("first ==> ", url);
+			//	System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 				Donnee_Html donnee_Html = new Donnee_Html();
 				donnee_Html.setUrl(urlValide);
+				System.out.print(urlValide);
 				donnee_Html.start();
 				donnee_Html.join();
 				updateComparerCSV(donnee_Html, fakeDonneeWikitable);
@@ -97,7 +101,7 @@ public class WikiExtractMain {
 			getStatistiques();
 		}
 		else {
-			for (Url urlValide : getUrlValides()) {
+			for (Url urlValide : getUrlValides(url)) {
 				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 				Donnee_Wikitable donnee_Wikitable= new Donnee_Wikitable();
 				donnee_Wikitable.setUrl(urlValide);
@@ -111,18 +115,22 @@ public class WikiExtractMain {
 
 	}
 
-	public static Set<Url> getUrlValides() throws MalformedURLException, IOException, UrlInvalideException{
+	public static Set<Url> getUrlValides(String urlY) throws MalformedURLException, IOException, UrlInvalideException{
 		HashSet<Url> lesUrlValides = new HashSet<Url>();
-		String BASE_WIKIPEDIA_URL = "output/url_file.txt";
-		BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
-		String url;
-		while ((url = br.readLine()) != null) {
-			Url wikiUrl = new Url(new URL(url));
+		//String BASE_WIKIPEDIA_URL = "output/url_file.txt";
+		//System.out.printf("Extract/Validate ==> ", urlY);
+		//BufferedReader br = new BufferedReader(new FileReader(urlY));
+		//String url;
+		//System.out.printf("Extract/valid/transf ==> ", br.readLine());
+		if(urlY != null) {System.out.println("second");
+
+			Url wikiUrl = new Url(new URL(urlY));
 			if(wikiUrl.estUrlValide()) {
 				lesUrlValides.add(wikiUrl);
+				System.out.println(wikiUrl);
 			}
 		}
-		br.close();
+		//br.close();
 		return lesUrlValides;
 	}
 	

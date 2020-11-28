@@ -31,7 +31,7 @@ public class WikiExtractMainTest {
 	 * @throws InterruptedException si erreur survenue
 	 */
 	@Test
-	@Ignore
+	//@Ignore
 	public void lancerExtraction() throws UrlInvalideException, IOException, ResultatEstNullException, InterruptedException {
 		String BASE_WIKIPEDIA_URL = "output/url_test.txt";
 		BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
@@ -74,7 +74,7 @@ public class WikiExtractMainTest {
 
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void getUrlValidesTest() {
 		try {
 			HashSet<Url> lesUrlValides = new HashSet<Url>();

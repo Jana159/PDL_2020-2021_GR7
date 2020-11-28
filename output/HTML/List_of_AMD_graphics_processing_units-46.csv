@@ -1,6 +1,6 @@
-Model; Released; Code name; Fab (nm); Core Clock (MHz); Core config1; Fillrate; Fillrate; Shared Memory; Shared Memory; Shared Memory; Processing power (GFLOPS); Max. Combined TDP2 (Watts); Fusion_APU
-Model; Released; Code name; Fab (nm); Core Clock (MHz); Core config1; Pixel (GP/s); Texture (GT/s); Bandwidth (GB/s); Bus type; Bus width (bit); Processing power (GFLOPS); Max. Combined TDP2 (Watts); Fusion_APU
-Radeon HD 6380G; June 14, 2011; WinterPark; 32; 400; 160:8:4:2; 1.6; 3.2; 17.06; DDR3-1333; 128; 128; 35; E2-3000M
-Radeon HD 6480G; June 14, 2011; BeaverCreek; 32; 444; 240:12:4:3; 1.77; 3.55; 17.06; DDR3-1333; 128; 213.1; A4-3300M A4-3310MX; 
-Radeon HD 6520G; June 14, 2011; BeaverCreek; 32; 400; 320:16:8:4; 3.2; 6.4; 17.06; DDR3-1333; 128; 256; A6-3400M A6-3410MX A6-3420M; 
-Radeon HD 6620G; June 14, 2011; BeaverCreek; 32; 444; 400:20:8:5; 3.55; 8.88; 25.6; 35 - 45; 128; DDR3-1600; 355.2; A8-3500M A8-3510MX A8-3530MX
+Model; Released; Codename; Architecture; Fab (nm); Core clock rate (MHz); Config core[ a]; Fillrate; Fillrate; Shared memory; Shared memory; Shared memory; Processing power (GFLOPS); API compliance (version); API compliance (version); API compliance (version); API compliance (version); Combined TDP[ b]; Combined TDP[ b]; APU
+Model; Released; Codename; Architecture; Fab (nm); Core clock rate (MHz); Config core[ a]; Pixel (GP/s); Texture (GT/s); Bandwidth (GB/s); Bus type; Bus width (bit); Processing power (GFLOPS); Direct3D; OpenGL; OpenCL; Vulkan; Idle (W); Max. (W); APU
+Radeon HD 6250[ 158]; November 9, 2010[ 159]; Wrestler[ 160]; TeraScale 2; 40; 280– 400; 80:8:4:2; 1.12– 1.6; 2.24– 3.2; 8.525; DDR3-1066; 64; 44.8– 64; 11.3 (11_0); 4.5; 1.2; N/A; Un­ known; 9; C-30, C-50, Z-60
+Radeon HD 6290; January 7, 2011; Ontario; TeraScale 2; 40; 276– 400; 80:8:4:2; 1.12– 1.6; 2.24– 3.2; 8.525; DDR3-1066; 64; 44.8– 64; 11.3 (11_0); 4.5; 1.2; N/A; Un­ known; 9; C-60
+Radeon HD 6310[ 158]; November 9, 2010[ 159]; Wrestler[ 160]; TeraScale 2; 40; 492; 80:8:4:2; 2.0; 4.0; 8.525; DDR3-1066; 64; 80; 11.3 (11_0); 4.5; 1.2; N/A; Un­ known; E-240, E-300, E-350; 
+Radeon HD 6320; August 15, 2011; Wrestler[ 160]; TeraScale 2; 40; 508– 600; 80:8:4:2; 18; 2.032– 2.4; 4.064– 4.8; 10.6; 64; DDR3-1333; 11.3 (11_0); 4.5; 1.2; N/A; Un­ known; 82– 97; E-450

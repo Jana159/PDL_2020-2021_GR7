@@ -98,6 +98,7 @@ public class Donnee_Html extends Donnee {
 		String titre = url.getTitre();
 		/* On recupere le nombre calcule de lignes et de colonnes de tous
 		les tableaux de l'url*/
+		System.out.printf("extraire", url);
 		try {
 			URL urlExtraction = new URL("https://"+langue+".wikipedia.org/wiki/"+titre+"?action=render");
 			this.setHtml(this.recupContenu(urlExtraction));
@@ -106,9 +107,10 @@ public class Donnee_Html extends Donnee {
 			hasPage = false;
 		}
 		supprimerPointsVirgule(this.donneeHTML);
+		String titreSain = titre.replaceAll("[\\/\\?\\:\\<\\>]", "");
+		htmlVersCSV(titreSain);
 		if(pageComporteTableau() && hasPage){
-			String titreSain = titre.replaceAll("[\\/\\?\\:\\<\\>]", "");
-			htmlVersCSV(titreSain);
+
 		}
 	}
 
@@ -175,45 +177,35 @@ public class Donnee_Html extends Donnee {
 		for (Element ligne : lignes) {
 			this.colonneActuelle = 0;
 			Elements cellules = ligne.select("td, th");
-			/* Parcours des cellules de la ligne, et appel de methodes
-			gerant les colspans et rowspans si besoin */
+			/* Parcours des cellules de la ligne, et appel de methodes gerant les colspans et rowspans si besoin */
 			for (Element cellule : cellules) {
-				//System.out.println("Ligne " + this.ligneActuelle + " ; Colonne " + this.colonneActuelle);
-				// Si on un colspan et un rowspan sur la meme cellule
+				//System.out.println("Ligne " + this.ligneActuelle + " ; Colonne " + this.colonneActuelle);// Si on un colspan et un rowspan sur la meme cellule
 				if ((cellule.hasAttr("colspan")) && (cellule.hasAttr("rowspan"))){
 					String colspanValue = cellule.attr("colspan").replaceAll("[^0-9.]", "");
 					String rowspanValue = cellule.attr("rowspan").replaceAll("[^0-9.]", "");
 					int nbColspans = Integer.parseInt(colspanValue);
 					int nbRowspans = Integer.parseInt(rowspanValue);
 					gererColspansEtRowspans(nbRowspans, nbColspans, cellule);
-				}
-				// Si on a un rowspan uniquement
+				}// Si on a un rowspan uniquement
 				else if (cellule.hasAttr("rowspan")) {
 					String rowspanValue = cellule.attr("rowspan").replaceAll("[^0-9.]", "");
 					int nbRowspans = Integer.parseInt(rowspanValue);
-
 					int[] tab = {this.ligneActuelle, this.colonneActuelle, nbRowspans};
 					this.rowspanFound.add(tab);
 					correctRow();
 					gererRowspans(nbRowspans, cellule, this.ligneActuelle);
-				}
-				// Si on a un colspan uniquement
+				}// Si on a un colspan uniquement
 				else if (cellule.hasAttr("colspan")) {
 					String colspanValue = cellule.attr("colspan").replaceAll("[^0-9.]", "");
 					int nbColspans = Integer.parseInt(colspanValue);
 					gererColspans(nbColspans, cellule, this.colonneActuelle);
-				}
-				// La cellule est 'normale'
-				else {
-					stockerCellule(cellule);
-				}
+				}// La cellule est 'normale'
+				else {stockerCellule(cellule);}
 				this.colonneActuelle++;
 				if(this.colonneActuelle > maxColonnesLigne) maxColonnesLigne = this.colonneActuelle;
-			}
-			this.ligneActuelle++;
+			} this.ligneActuelle++;
 			this.lignesEcrites++;
-		}
-		this.colonnesEcrites += maxColonnesLigne;
+		}  this.colonnesEcrites += maxColonnesLigne;
 		addSeparator();
 	}
 
@@ -374,7 +366,9 @@ public class Donnee_Html extends Donnee {
 	 */
 	@Override
 	public boolean pageComporteTableau() throws ExtractionInvalideException {
+		System.out.println("ERREUR page : " + this.donneeHTML);
 		Document page = Jsoup.parseBodyFragment(this.donneeHTML);
+		System.out.println("ERREUR page After: ");
 		if((!page.getElementsByClass("wikitable").isEmpty()) || (!page.select("table:not([^])").isEmpty())) {
 			return true;
 		}

@@ -10,24 +10,24 @@ Colloquy; Timothy Hatcher, Kiji Roshi; Desktop: Free software, mobile: commercia
 ERC; Alexander L. Belikoff, Sergey Berezin; Free software; GPL; TUI, GUI; Emacs Lisp
 F-IRC; Folkert van Heusden; Free software; GPL; TUI; C++
 GrumpyChat[ 5]; Petr Bena; Free software; LGPL; GUI; C++
-HexChat[ 6]; Berke Viktor; Free software; GPL; TUI, GUI; C
-IceChat[ 7] [ 8]; Paul Vanderzee; Free software; GPL; GUI; C# (Visual Basic until 2004)[ 9]
-Igloo[ 10]; Jordan Koch; Commercial; Proprietary; GUI; Swift
+HexChat[ 6]; Berke Viktor; Shareware, 30-day trial[ 7]; GPL; TUI, GUI; C
+IceChat[ 8] [ 9]; Paul Vanderzee; Free software; GPL; GUI; C# (Visual Basic until 2004)[ 10]
+Igloo[ 11]; Jordan Koch; Commercial; Proprietary; GUI; Swift
 Instantbird; Florian Quèze; Free software; GPL; GUI; C/C++, JavaScript, CSS, XUL
-IRCCloud[ 11]; IRCCloud Ltd.; Freemium; Proprietary; Web; JavaScript frontend, Erlang backend
+IRCCloud[ 12]; IRCCloud Ltd.; Freemium; Proprietary; Web; JavaScript frontend, Erlang backend
 ircII; Michael Sandrof; Free software; BSD; TUI; C
 Ircle; Onno Tijdgat; Commercial, 30-day trial; Proprietary; GUI; C
 Irssi; Timo Sirainen; Free software; GPL; TUI; C
 Kiwi IRC; Darren Whitlen; Free software; AGPL; Web; JavaScript frontend, Node.js backend
-kirc; Michael Czigler; Free software; GPL; TUI; C
+kirc[ 13]; Michael Czigler; Free software; GPL; TUI; C
 KVIrc; Szymon Stefanek; Free software; GPL; GUI; C++
 Konversation; KDE; Free software; GPL; GUI; C++
-LeafChat[ 12]; Samuel Marshall; Free software; GPL; GUI; Java
-LimeChat[ 13] [ 14] [ 15]; Satoshi Nakagawa; Free software; GPL[ 16]; GUI; RubyCocoa (2007–2010)[ 15] [ 16] Objective-C (2010–)[ 17]
+LeafChat[ 14]; Samuel Marshall; Free software; GPL; GUI; Java
+LimeChat[ 15] [ 16] [ 17]; Satoshi Nakagawa; Free software; GPL[ 18]; GUI; RubyCocoa (2007–2010)[ 17] [ 18] Objective-C (2010–)[ 19]
 Linkinus; Conceited Software; Commercial, 15-day trial; Proprietary; GUI; Objective-C
 Mibbit; Jimmy Moore; Textual Adbar; Proprietary; Web; JavaScript frontend, Java backend
-mIRC; Khaled Mardam-Bey; Shareware, 30-day trial[ 18]; Proprietary; GUI; C/C++[ 19]
-Monochrome[ 20]; Peter Pawlowski; Freeware; GPLv2; GUI; C#
+mIRC; Khaled Mardam-Bey; Shareware, 30-day trial[ 20]; Proprietary; GUI; C/C++[ 21]
+Monochrome[ 22]; Peter Pawlowski; Freeware; GPLv2; GUI; C#
 Nettalk; Nicolas Kruse; Freeware; Apache 2.0; GUI; Visual Basic
 Opera (until version 12.xx) [ Note 3]; ; Freeware; Proprietary; GUI[ Note 4]; C++
 Pidgin; ; Free software; GPL; GUI; C

@@ -14,7 +14,7 @@ MPEG program stream (PS); .m2p, .ps; MPEG; Patent encumbered; Yes; ?; Only in pr
 MPEG transport stream (TS); .ts; MPEG; Patent encumbered; Yes; Yes; No; No; No; Yes; ?; No; Yes
 BDAV MPEG-2 transport stream (M2TS); .m2ts; BDA; Proprietary; Yes; Yes; Yes; Yes; Yes; Yes; Yes; Needs multiple files[ ix]; Yes
 Material Exchange Format (MXF); .mxf; SMPTE; Open standard, patent-free[ 17]; Yes; Yes; ?; Yes; No; ?; ?; Yes[ 18]; No
-Ogg; .ogg; Xiph.Org Foundation; BSD-style license, patent-free; Yes; Yes; Yes; CMML, Ogg Skeleton, Vorbis comment[ 19]; No; Yes; ?; No; Yes
+Ogg; .ogg, .ogv, .ogx; Xiph.Org Foundation; BSD-style license, patent-free; Yes; Yes; Yes; CMML, Ogg Skeleton, Vorbis comment[ 19]; No; Yes; ?; No; Yes
 QuickTime File Format (QTFF); .mov, .qt; Apple Inc.; Proprietary[ 20]; Yes; Yes; Yes; Yes; Yes; Yes; Yes; Not standard; Yes
 RealMedia Variable Bitrate (RMVB); .rmvb; RealNetworks; Proprietary; ?; Yes; ?; ?; No; Yes; ?; No; ?
 Video Object (VOB); .vob; DVD Forum; Proprietary; Yes; Yes; Needs multiple files[ x]; No; Needs multiple files[ x]; No; No; No; Yes

@@ -1,10 +1,10 @@
 Name; Developer; Software license; Latest stable software release; Operating system; Year (not dynamic, but easier for sorting); 
 BitComet; BitComet Development Group; Proprietary, Adware; 1.66 (April  13, 2020; 5  months ago  (2020-04-13)) [ ±] [ 5]; Windows, macOS; 2020; 
 BitLord; House of Life; Proprietary, Adware installs WhenU adware; Windows: 2.4.6-354 (July  29, 2020; 2  months ago  (2020-07-29)) [ ±] macOS: 2.4.6-348 (October  24, 2019; 11  months ago  (2019-10-24)) [ ±]; Windows, macOS; 2017; 
-BitTorrent; BitTorrent; Proprietary, Adware; Windows 7.10.5.45785 / August  14, 2020; 53  days ago  (2020-08-14)[ 6] Mac 7.4.3.43797 / September  4, 2019; 13  months ago  (2019-09-04)[ 7] Android 6.5.7 / September  9, 2020; 27  days ago  (2020-09-09)[ 8]; Windows; 7.10.5.45785 / August  14, 2020; 53  days ago  (2020-08-14)[ 6]; Mac; 7.4.3.43797 / September  4, 2019; 13  months ago  (2019-09-04)[ 7]; Android; 6.5.7 / September  9, 2020; 27  days ago  (2020-09-09)[ 8]; Windows, macOS; 2020
-Windows; 7.10.5.45785 / August  14, 2020; 53  days ago  (2020-08-14)[ 6]; 
+BitTorrent; BitTorrent; Proprietary, Adware; Windows 7.10.5.45785 / August  14, 2020; 56  days ago  (2020-08-14)[ 6] Mac 7.4.3.43797 / September  4, 2019; 13  months ago  (2019-09-04)[ 7] Android 6.5.7 / September  9, 2020; 30  days ago  (2020-09-09)[ 8]; Windows; 7.10.5.45785 / August  14, 2020; 56  days ago  (2020-08-14)[ 6]; Mac; 7.4.3.43797 / September  4, 2019; 13  months ago  (2019-09-04)[ 7]; Android; 6.5.7 / September  9, 2020; 30  days ago  (2020-09-09)[ 8]; Windows, macOS; 2020
+Windows; 7.10.5.45785 / August  14, 2020; 56  days ago  (2020-08-14)[ 6]; 
 Mac; 7.4.3.43797 / September  4, 2019; 13  months ago  (2019-09-04)[ 7]; 
-Android; 6.5.7 / September  9, 2020; 27  days ago  (2020-09-09)[ 8]; 
+Android; 6.5.7 / September  9, 2020; 30  days ago  (2020-09-09)[ 8]; 
 Deluge; various; GPL; 2.0.3 (June  12, 2019; 15  months ago  (2019-06-12)) [ ±]; Windows, macOS, Linux, BSD; 2019; 
 FlashGet; Trend Media; Proprietary; 3.7.0.1220 (May  17, 2013; 7  years ago  (2013-05-17)[ 9] ) [ ±]; Windows; 2013; 
 Free Download Manager; alervd; Proprietary; 6.10.0 (build 3016) (5 June 2020 19 days ago); Windows, macOS, Android; 2020; 
@@ -21,7 +21,7 @@ qBittorrent; Christophe Dumez; GPL; 4.2.5 (April  25, 2020; 5  months ago  (2
 rTorrent; Jari Sundell; GPL; rTorrent 0.9.8 / libTorrent 0.13.8 (July  19, 2019; 14  months ago  (2019-07-19)) [ ±] [ 17]; Linux; 2019; 
 Robert; Sponge, co-developer of I2P; GPL; Template:Latest stable software release/Robert (P2P software); ; 2009; 
 Shareaza; Shareaza Development Team; GPL; 2.7.10.2 (September  18, 2017; 3  years ago  (2017-09-18)[ 18] ) [ ±]; Windows; 2017; 
-Tixati; Kevin Hearn; Proprietary; 2.76 (October  1, 2020; 5  days ago  (2020-10-01)[ 19] ) [ ±]; Windows, Linux; 2020; 
+Tixati; Kevin Hearn; Proprietary; 2.76 (October  1, 2020; 8  days ago  (2020-10-01)[ 19] ) [ ±]; Windows, Linux; 2020; 
 Tonido; CodeLathe; Proprietary; 3.62.0.21836 (December  31, 2012; 7  years ago  (2012-12-31)) [ ±] Du; Windows, macOS, Linux, BSD; 2012; 
 Transmission; various; GPL/MIT; 3.00 (May  22, 2020; 4  months ago  (2020-05-22)) [ ±] [ 20]; Windows, macOS, Linux, BSD; 2020; 
 Tribler; The Tribler Team; LGPL; 7.4.4 (February  21, 2020; 7  months ago  (2020-02-21)) [ ±] [ 21]; Windows, macOS, Linux, Android; 2019; 

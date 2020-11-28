@@ -1,17 +1,16 @@
 Model (Codename); Launch; Architecture (Fab); Core; Core; Fillrate[ a] [ b] [ c]; Fillrate[ a] [ b] [ c]; Processing power[ a] [ d] (GFLOPS); Memory; Memory; Memory; Memory; TDP
 Model (Codename); Launch; Architecture (Fab); Config[ e]; Clock[ a] (MHz); Texture (GT/s); Pixel (GP/s); Processing power[ a] [ d] (GFLOPS); Bus  type &   width; Size (GiB); Clock (MHz); Band- width (GB/s); TDP
-Radeon 520[ 173] (Banks); 18 April 2017; GCN 1st gen (28 nm); 320:20:8; 1030; 20.6; 8.2; 659; DDR3 64-bit; 2; 1000; 16.0; < 50  W
-Radeon 520[ 173] (Banks); 18 April 2017; GCN 1st gen (28 nm); 320:20:8; 1030; 20.6; 8.2; 659; GDDR5 64-bit; 2; 1125; 36; < 50  W
-Radeon 530[ 174] (Weston); 18 April 2017; GCN 3rd gen (28 nm); 384:24:8; 730 1024; 24.6; 8.2; 786; DDR3 64-bit; 2; 900; 14.4; < 50  W
-Radeon 530X[ 175] Radeon 535[ 176] (Polaris 24 XT); 18 April 2017; GCN 3rd gen (28 nm); 384:24:8; 730 1024; 24.6; 8.2; 786; GDDR5 64-bit; 2; 1125; 36; < 50  W
-Radeon RX 540[ 177] (Lexa Pro); 11 November 2017; GCN 4th gen (14 nm); 512:32:16; 1124 1219; 39; 19.5; 1248; GDDR5 128-bit; 2; 1500; 96; < 50  W
-Radeon 540X[ 178] (Polaris 23 XL); 11 April 2018; GCN 4th gen (14 nm); 512:32:16; 1124 1219; 39; 19.5; 1248; GDDR5 128-bit; 2; 1500; 96; < 50  W
-Radeon RX 550[ 179] (Lexa Pro); 2 July 2017; GCN 4th gen (14 nm); 640:40:16; 1100 1287; 51.5; 20.6; 1647; GDDR5 128-bit; 2; 1500; 96; < 50  W
-Radeon 550X[ 180] (Polaris 23 XT); 11 April 2018; GCN 4th gen (14 nm); 640:40:16; 1100 1287; 51.5; 20.6; 1647; GDDR5 128-bit; 2; 1500; 96; < 50  W
-Radeon RX 560[ 181] [ 182] [ 183] (Baffin XT); 5 January 2017; GCN 4th gen (14 nm); 896:56:16; 784 1032; 57.8; 16.5; 1849; GDDR5 128-bit; 4; 1710; 109.4; 55  W
-Radeon RX 560[ 181] [ 182] [ 183] (Baffin XT); 5 January 2017; GCN 4th gen (14 nm); 896:56:16; 1000 1053; 59; 16.9; 1887; GDDR5 128-bit; 4; 1500; 96; 55  W
-Radeon RX 560[ 181] [ 182] [ 183] (Baffin XT); 5 January 2017; GCN 4th gen (14 nm); 1024:64:16; 1090 1202; 77; 19.2; 2462; GDDR5 128-bit; 4; 1500; 96; 65  W
-Radeon RX 560X[ 184] (Polaris 31 XL); 9 January 2019; GCN 4th gen (14 nm); 896:56:16; 1223; 68.5; 19.6; 2192; GDDR5 128-bit; 4; 1750; 112; 65  W
-Radeon RX 570[ 185] (Ellesmere Pro); 10 December 2017; GCN 4th gen (14 nm); 2048:128:32; 926 1206; 154.4; 38.6; 4940; GDDR5 256-bit; 8; 1650; 211; 85  W
-Radeon RX 580[ 186] (Polaris 20 XT); 18 April 2017; GCN 4th gen (14 nm); 2304:144:32; 1000 1077; 155.1; 34.5; 4963; GDDR5 256-bit; 8; 2000; 256; 100  W
-Radeon RX 580X[ 187] (Polaris 20 XT); 11 April 2018; GCN 4th gen (14 nm); 2304:144:32; 1000 1077; 155.1; 34.5; 4963; GDDR5 256-bit; 8; 2000; 256; 100  W
+Radeon R5 M420[ 164] (Jet Pro); 15 May 2016; GCN 1st gen (28 nm); 320:20:8; 780 855; 15.6 17.1; 6.24 6.84; 499 547; DDR3 64-bit; 2; 1000; 16.0; ~20  W
+Radeon R5 M430[ 165] (Exo Pro); 15 May 2016; GCN 1st gen (28 nm); 320:20:8; 1030 ?; 20.6; 8.2; 659.2 659.2; DDR3 64-bit; 2; 1000; 14.4; 18  W
+Radeon R7 M435[ 166] (Jet Pro); 15 May 2016; GCN 1st gen (28 nm); 320:20:8; 780 855; 15.6 17.1; 6.24 6.84; 499 547; GDDR5 64-bit; 4; 1000; 32; ~20  W
+Radeon R7 M440[ 167] (Meso Pro); 15 May 2016; GCN 1st gen (28 nm); 320:20:8; 1021 ?; 20.4; 8.17; 653 653; DDR3 64-bit; 4; 1000; 16; ~20  W
+Radeon R7 M445[ 168] (Meso Pro); 14 May 2016; GCN 1st gen (28 nm); 320:20:8; 780 920; 15.6 18.4; 6.24 7.36; 499 589; GDDR5 64-bit; 4; 1000; 32; ~20  W
+Radeon R7 M460[ 169] [ 170] (Meso XT); April 2016; GCN 1st gen (28 nm); 384:24:8; 1100 1125; 26.4 27.0; 8.8 9.00; 844 864; DDR3 64-bit; 2; 900; 14.4; Un­ known
+Radeon RX 460[ 171] (Baffin); August 2016; GCN 4th gen (14 nm); 896:56:16; Un­ known; Un­ known; Un­ known; Un­ known; GDDR5 128-bit; 2; 1750; 112; 35  W?
+Radeon R7 M465[ 172] [ 173] (Litho XT); May 2016; GCN 1st gen (28 nm); 384:24:8; 825 960; 19.8 23.0; 6.6 7.68; 634 737; GDDR5 128-bit; 4; 1150; 32; Un­ known
+Radeon R7 M465X[ 174] (Tropo XT); May 2016; GCN 1st gen (28 nm); 512:32:16; 900 925; 28.8 29.6; 14.4 14.80; 921 947; GDDR5 128-bit; 4; 1125; 72; Un­ known
+Radeon R9 M470[ 175] (Strato Pro); May 2016; GCN 2nd gen (28 nm); 768:48:16; 900 1000; 43.2 48.0; 14.4 16.00; 1382 1536; GDDR5 128-bit; 4; 1500; 96; ~75  W
+Radeon R9 M470X[ 176] (Strato XT); May 2016; GCN 2nd gen (28 nm); 896:56:16; 1000 1100; 56.0 61.6; 16.00 17.60; 1792 1971; GDDR5 128-bit; 4; 1500; 96; ~75  W
+Radeon RX 470[ 177] (Ellesmere Pro); August 2016; GCN 4th gen (14 nm); 2048:128:32; Un­ known; Un­ known; Un­ known; Un­ known; GDDR5 256-bit; 4; 1650; 211; 85  W?
+Radeon RX 480M (Baffin); TBA; GCN 4th gen (14 nm); 1024:xx:xx; Un­ known; Un­ known; Un­ known; Un­ known; GDDR5 128-bit; Un­ known; Un­ known; Un­ known; 35  W
+Radeon R9 M485X[ 178] (Antigua XT); May 2016; GCN 3rd gen (28 nm); 2048:128:32; 723; 92.5; 23.14; 2961; GDDR5 256-bit; 8; 1250; 160; ~100  W

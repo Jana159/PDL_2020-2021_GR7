@@ -11,8 +11,8 @@ Name a new record type; mode cust = struct(string name, address); struct cust { 
 Name a new union type; mode taggedu = union(string s, real r); union u { std::string s float f }
 Name a procedure or function; proc f = (real x) real: ( code result ); float f(float x) { code return result }
 Procedure default parameters; proc p = (union (real, void) in x)void:         ( real x = (in x|(real x):x|888) code ); void p(float x=888) { code }
-Name a new operator; op ↑ = (real x,y) real: x**y; N/A
-Set priority on a new operator; prio ↑ = 9; N/A
+Name a new operator; op â†‘ = (real x,y) real: x**y; N/A
+Set priority on a new operator; prio â†‘ = 9; N/A
 Chain variables assignment; a:=b:=c:=d; a = b = c = d
 Displacement operator - ALGOL 68C only; a:=:=b:=:=c:=:=d; a = b b = c c = d
 Append "substr" to a variable str; str +:= "substr"; str += " substr"

@@ -1,6 +1,7 @@
-Model (codename); Launch; Architecture &   Fab; Core; Core; Fillrate[ a] [ b] [ c]; Fillrate[ a] [ b] [ c]; Processing power[ a] [ d] (GFLOPS); Memory; Memory; Memory; Memory; TDP
-Model (codename); Launch; Architecture &   Fab; Config[ e]; Clock[ a] (MHz); Texture (GT/s); Pixel (GP/s); Processing power[ a] [ d] (GFLOPS); Bus  type &   width; Size (GiB); Clock (MT/s); Band-width (GB/s); TDP
-Radeon RX 5300M[ 194] (Navi 14); 13 November 2019; RDNA 1.0 7 nm; 1408:88:32 22 CU; 1000 1445; 127.2; 46.2; 4069; GDDR6 96-bit; 3; 14000; 168; 85  W
-Radeon RX 5500M[ 195] (Navi 14); 7 October 2019; RDNA 1.0 7 nm; 1408:88:32 22 CU; 1375 1645; 144.8; 52.6; 4632; GDDR6 128-bit; 4; 14000; 224; 85  W
-Radeon RX 5600M[ 196] (Navi 10); 2020; RDNA 1.0 7 nm; 2304:144:64 36 CU; 1000 1265; 182.2; 81; 5829; GDDR6 192-bit; 6; 12000; 288; 150  W
-Radeon RX 5700M[ 197] (Navi 10); 2020; RDNA 1.0 7 nm; 2304:144:64 36 CU; 1465 1720; 247.7; 110.1; 7926; GDDR6 256-bit; 8; 12000; 384; 180  W
+Model (Codename); Launch; Architecture (Fab); Core; Core; Fillrate[ a] [ b] [ c]; Fillrate[ a] [ b] [ c]; Processing power[ a] [ d] (GFLOPS); Memory; Memory; Memory; Memory; TDP
+Model (Codename); Launch; Architecture (Fab); Config[ e]; Clock[ a] (MHz); Texture (GT/s); Pixel (GP/s); Processing power[ a] [ d] (GFLOPS); Bus  type &   width; Size (GiB); Clock (MHz); Band- width (GB/s); TDP
+Radeon 610[ 194] (Banks); 13 August 2019; GCN 1st gen (28 nm); 320:20:8; 1030; 20.6; 8.2; 659; GDDR5 64-bit; 2â€“4; 1125; 36; < =50  W
+Radeon 620[ 195] (Polaris 24 XL); 13 August 2019; GCN 3rd gen (28 nm); 384:24:8; 730 1024; 24.6; 8.2; 786; DDR3 64-bit; 2â€“4; 900; 14.4; < =50  W
+Radeon 625[ 196] (Polaris 24 XL); 13 August 2019; GCN 3rd gen (28 nm); 384:24:8; 730 1024; 24.6; 8.2; 786; GDDR5 64-bit; 2â€“4; 1125; 36; < =50  W
+Radeon 630[ 197] (Polaris 23 XL); 13 August 2019; GCN 4th gen (14 nm); 512:32:8; 1082 1219; 39; 9.8; 1248; GDDR5 64-bit[ 198]; 2â€“4; 1500; 48; < =50  W
+Radeon RX 640[ 199] (Polaris 23 XT); 13 August 2019; GCN 4th gen (14 nm); 640:40:16; 1100 1287; 51.5; 20.6; 1647; GDDR5 64-bit; 2â€“4; 1750; 56; < =50  W
