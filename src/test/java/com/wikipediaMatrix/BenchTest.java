@@ -48,8 +48,7 @@ public class BenchTest {
 
             donneeHtml = new Donnee_Html();
             donneeHtml.setUrl(wikiUrl);
-            donneeHtml.start();
-            donneeHtml.join();
+
             numberOfCSV = donneeHtml.getNbTableaux();
             for (int i = 1; i <= numberOfCSV; i++){
                 System.out.println("CSV generate : " + mkCSVFileName(outputDirHtml + wikiUrl.getTitre(), i));
@@ -58,8 +57,7 @@ public class BenchTest {
 
             donneeWikitable = new Donnee_Wikitable();
             donneeWikitable.setUrl(wikiUrl);
-            donneeWikitable.start();
-            donneeWikitable.join();
+
             numberOfCSV = donneeHtml.getNbTableaux();
             for (int i = 1; i <= numberOfCSV; i++){
                 System.out.println("CSV generate : " + mkCSVFileName(outputDirWikitext + wikiUrl.getTitre(), i));

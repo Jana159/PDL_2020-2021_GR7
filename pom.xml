@@ -34,6 +34,7 @@
 					<archive>
 						<manifest>
 							<mainClass>com.wikipediaMatrix.WikiExtractMain</mainClass>
+							<addClasspath>target/dependency-jars/jsoup-1.8.3.jar</addClasspath>
 						</manifest>
 					</archive>
 				</configuration>

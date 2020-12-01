@@ -44,12 +44,12 @@ public class WikiExtractMain {
 		else if (args[1].equalsIgnoreCase("W")) {
 			lancerSimpleExtraction(false, args[0]);
 		}
-		else if (choix.equals("X")) {
+		/*else if (choix.equals("X")) {
 			lancerDoubleExtraction(args[0]);
 		}
 		else {
 			System.out.println("Les seules lettres acceptees sont H, W et X !");
-		}
+		}*/
 		entree.close();
 	}
 
@@ -62,55 +62,58 @@ public class WikiExtractMain {
 	 * @throws ResultatEstNullException si le resultat est null
 	 * @throws InterruptedException si erreur survenue
 	 */
-	public static void lancerDoubleExtraction(String url) throws UrlInvalideException, IOException,
+	/*public static void lancerDoubleExtraction(String url) throws UrlInvalideException, IOException,
 			ResultatEstNullException, InterruptedException {
 		double urlActuelle = 1.0;
 		for (Url urlValide : getUrlValides(url)) {
 			//System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 			Donnee_Html donnee_Html = new Donnee_Html();
 			donnee_Html.setUrl(urlValide);
-			donnee_Html.start();
+
 			Donnee_Wikitable donnee_Wikitable= new Donnee_Wikitable();
 			donnee_Wikitable.setUrl(urlValide);
-			donnee_Wikitable.start();
-			donnee_Html.join();
-			donnee_Wikitable.join();
-			updateComparerCSV(donnee_Html, donnee_Wikitable);
+
+			//updateComparerCSV(donnee_Html, donnee_Wikitable);
 			urlActuelle++;
 		}
-		getStatistiques();
-	}
+		//getStatistiques();
+	}*/
 
 	public static void lancerSimpleExtraction(boolean isHtml , String url) throws MalformedURLException, IOException, UrlInvalideException, InterruptedException, ResultatEstNullException {
-		Donnee_Html fakeDonneeHtml = new Donnee_Html();
+		/*Donnee_Html fakeDonneeHtml = new Donnee_Html();
 		Donnee_Wikitable fakeDonneeWikitable = new Donnee_Wikitable();
-		double urlActuelle = 1.0;
+		double urlActuelle = 1.0;*/
 		System.out.printf("Extract ==> ", url);
+		Url urlx = new Url(new URL(url));
 		if (isHtml) {
-			for (Url urlValide : getUrlValides(url)) {
+			Donnee_Html donnee_Html = new Donnee_Html();
+			//donnee_Html.setUrl(urlValide);
+			try {
+				donnee_Html.extraire(urlx);
+
+			}catch (Exception e){
+				System.out.print("exception ");
+			}
+			/*for (Url urlValide : getUrlValides(url)) {
 				System.out.printf("first ==> ", url);
 			//	System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
-				Donnee_Html donnee_Html = new Donnee_Html();
-				donnee_Html.setUrl(urlValide);
+
 				System.out.print(urlValide);
-				donnee_Html.start();
-				donnee_Html.join();
-				updateComparerCSV(donnee_Html, fakeDonneeWikitable);
+				//updateComparerCSV(donnee_Html, fakeDonneeWikitable);
 				urlActuelle++;
-			}
-			getStatistiques();
+			}*/
+			//getStatistiques();
 		}
 		else {
 			for (Url urlValide : getUrlValides(url)) {
-				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
+			//	System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
 				Donnee_Wikitable donnee_Wikitable= new Donnee_Wikitable();
-				donnee_Wikitable.setUrl(urlValide);
-				donnee_Wikitable.start();
-				donnee_Wikitable.join();
-				updateComparerCSV(fakeDonneeHtml, donnee_Wikitable);
-				urlActuelle++;
+				//donnee_Wikitable.setUrl(urlValide);
+
+			//	updateComparerCSV(fakeDonneeHtml, donnee_Wikitable);
+				//urlActuelle++;
 			}
-			getStatistiques();
+			//();
 		}
 
 	}
@@ -134,7 +137,7 @@ public class WikiExtractMain {
 		return lesUrlValides;
 	}
 	
-	public static void updateComparerCSV(Donnee_Html donnee_Html, Donnee_Wikitable donnee_Wikitable) throws ResultatEstNullException {
+	/*public static void updateComparerCSV(Donnee_Html donnee_Html, Donnee_Wikitable donnee_Wikitable) throws ResultatEstNullException {
 		ComparerCSV comparerCsv = new ComparerCSV(donnee_Html, donnee_Wikitable);
 		comparerCsv.informationsExtraction();
 		nbTablesHtml += comparerCsv.getTablesHtml();
@@ -145,9 +148,9 @@ public class WikiExtractMain {
 		nbColonnesWikitext += comparerCsv.getColonnesWikitable();
 		nbLignesWikitext += comparerCsv.getLignesWikitable();
 		tempsExeWikitext += comparerCsv.getTempsExeWikitable();
-	}
+	}*/
 	
-	public static void getStatistiques() {
+	/*public static void getStatistiques() {
 		long tempsExeTotal = (System.currentTimeMillis());
 		System.out.println("Temps d'execution : " + tempsExeTotal/1000 + " secondes");
 		System.out.println("-----------STATISTIQUES-----------");
@@ -155,7 +158,7 @@ public class WikiExtractMain {
 		System.out.println("Nombre de tableaux parsés: " + nbTablesHtml + ", lignes parsées : " + nbLignesHtml + ", colonnes parsées : " + nbColonnesHtml);
 		System.out.println("- WIKITEXT - Temps d'execution : " + tempsExeWikitext/1000 + " secondes.");
 		System.out.println("Nombre de tableaux parsés: " + nbTablesWikitext + ", lignes parsées : " + nbLignesWikitext + ", colonnes parsées : " + nbColonnesWikitext);
-	}
+	}*/
 
 //	Logger example
 //	=====================================================

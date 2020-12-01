@@ -23,7 +23,7 @@ import org.jsoup.select.Elements;
  *
  */
 
-public abstract class Donnee extends Thread{
+public abstract class Donnee{
 
 	private long tempsOriginal;
 	private Map<Integer, Integer> nbLignesTableaux = new HashMap<Integer, Integer>();
@@ -31,10 +31,7 @@ public abstract class Donnee extends Thread{
 	private int nbTableaux = 0;
 	public static CyclicBarrier newBarrier = new CyclicBarrier(2);
 
-	@Override
-	public void run() {
-		// lancer une extraction
-	}
+
 
 	public Map<Integer, Integer> getNbLignesTableaux() {
 		return nbLignesTableaux;

@@ -60,8 +60,7 @@ public class ApplicationTest {
         setup();
         Donnee_Html donneeHtml = new Donnee_Html();
         donneeHtml.setUrl(ownUrl);
-        donneeHtml.start();
-        donneeHtml.join();
+
         assertEquals(3, donneeHtml.getNbTableaux());
     }
 
@@ -72,8 +71,7 @@ public class ApplicationTest {
         setup();
         Donnee_Wikitable donneeWikitable = new Donnee_Wikitable();
         donneeWikitable.setUrl(ownUrl);
-        donneeWikitable.start();
-        donneeWikitable.join();
+
         assertEquals(3, donneeWikitable.getNbTableaux());
     }
 
@@ -89,11 +87,9 @@ public class ApplicationTest {
             Donnee_Html donneeHtml = new Donnee_Html();
             Donnee_Wikitable donneeWikitable = new Donnee_Wikitable();
             donneeHtml.setUrl(wikiUrl);
-            donneeHtml.start();
-            donneeHtml.join();
+
             donneeWikitable.setUrl(wikiUrl);
-            donneeWikitable.start();
-            donneeWikitable.join();
+
           //  assert donneeHtml.getNbTableaux() == donneeWikitable.getNbTableaux();
             assertEquals(donneeHtml.getNbTableaux() ,  donneeWikitable.getNbTableaux());
         }
@@ -106,8 +102,7 @@ public class ApplicationTest {
         assertTrue(ownUrl.estTitreValide());
         Donnee_Wikitable donneeWikitable = new Donnee_Wikitable();
         donneeWikitable.setUrl(ownUrl);
-        donneeWikitable.start();
-        donneeWikitable.join();
+
 
         CSVValidator csvValidator = CSVValidator.getInstance();
 
@@ -121,8 +116,7 @@ public class ApplicationTest {
         assertTrue(urlTest.estTitreValide());
         Donnee_Html donneeHtml = new Donnee_Html();
         donneeHtml.setUrl(urlTest);
-        donneeHtml.start();
-        donneeHtml.join();
+
 
         CSVValidator csvValidator = CSVValidator.getInstance();
 
@@ -169,8 +163,7 @@ try{
         Url urlTest = new Url(new URL("https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units"));
         Donnee_Html donneeHtml = new Donnee_Html();
         donneeHtml.setUrl(urlTest);
-        donneeHtml.start();
-        donneeHtml.join();
+
 
     } catch (ArrayIndexOutOfBoundsException e) {
         System.out.println("URL contenant des row span ou de col spa");

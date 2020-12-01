@@ -71,14 +71,7 @@ public class Donnee_Html extends Donnee {
 	/**
 	 * Lance l'execution d'un thread pour l'extraction des tableaux de la page wikipedia
 	 */
-	@Override
-	public void run() {
-		try {
-			extraire(this.url);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 
 	/**
 	 * Recupere le contenu de la page
@@ -89,16 +82,17 @@ public class Donnee_Html extends Donnee {
 	 * @throws IOException si erreur survenue
 	 */
 	@Override
-	public synchronized void extraire(Url url) throws UrlInvalideException, ExtractionInvalideException, IOException {
-		startTimer();
+	public void extraire(Url url) throws UrlInvalideException, ExtractionInvalideException, IOException {
+		//startTimer();
 		boolean hasPage = true;
+		System.out.print("befoore extract");
 		url.estTitreValide();
 		url.estPageWikipedia();
 		String langue = url.getLangue();
 		String titre = url.getTitre();
 		/* On recupere le nombre calcule de lignes et de colonnes de tous
 		les tableaux de l'url*/
-		System.out.printf("extraire", url);
+		System.out.print("extraire");
 		try {
 			URL urlExtraction = new URL("https://"+langue+".wikipedia.org/wiki/"+titre+"?action=render");
 			this.setHtml(this.recupContenu(urlExtraction));
@@ -109,6 +103,7 @@ public class Donnee_Html extends Donnee {
 		supprimerPointsVirgule(this.donneeHTML);
 		String titreSain = titre.replaceAll("[\\/\\?\\:\\<\\>]", "");
 		htmlVersCSV(titreSain);
+
 		if(pageComporteTableau() && hasPage){
 
 		}
@@ -124,7 +119,7 @@ public class Donnee_Html extends Donnee {
 	 * @throws ExtractionInvalideException si erreur à l'extraction
 	 */
 	public void htmlVersCSV(String titre) throws IOException, UrlInvalideException, ExtractionInvalideException {
-
+         System.out.print("htmltooocsv");
 		Document page = Jsoup.parseBodyFragment(this.donneeHTML);
 		Elements wikitables = page.getElementsByClass("wikitable");
 		Elements tablesNonWiki = page.select("table:not([^])");

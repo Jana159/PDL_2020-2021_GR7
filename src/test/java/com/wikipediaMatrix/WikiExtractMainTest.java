@@ -45,11 +45,9 @@ public class WikiExtractMainTest {
 				ComparerCSV comparerCsv = new ComparerCSV(testHtml, testWikitable);
 				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + wikiUrl.getTitre());
 				testHtml.setUrl(wikiUrl);
-				testHtml.start();
+
 				testWikitable.setUrl(wikiUrl);
-				testWikitable.start();
-				testHtml.join();
-				testWikitable.join();
+
 				comparerCsv.informationsExtraction();
 				nbTablesHtml += comparerCsv.getTablesHtml();
 				nbColonnesHtml += comparerCsv.getColonnesHtml();

@@ -49,14 +49,7 @@ public class Donnee_Wikitable extends Donnee{
         return this.wikitable;
     }
 
-    @Override
-    public void run() {
-        try {
-            extraire(this.url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public String getContenu() {
         return this.wikitable;
@@ -95,7 +88,7 @@ public class Donnee_Wikitable extends Donnee{
      * @throws MalformedURLException
      */
     @Override
-    public synchronized void extraire(Url url) throws  ExtractionInvalideException, IOException {
+    public void extraire(Url url) throws  ExtractionInvalideException, IOException {
         startTimer();
         url.estTitreValide();
         String titre = url.getTitre();

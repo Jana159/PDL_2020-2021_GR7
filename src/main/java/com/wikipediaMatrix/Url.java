@@ -39,6 +39,9 @@ public class Url {
 		}
 	}
 
+	public Url(String url, String s, String s1) {
+	}
+
 	/**
 	 * Verification de l'url (provient bien du site Wikipedia) et de la langue de la page
 	 * Initialiation variable langue

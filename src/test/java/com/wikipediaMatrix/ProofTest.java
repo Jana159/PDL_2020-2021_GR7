@@ -105,8 +105,7 @@ if(bool == true){
 
         Donnee_Html donneeHtml = new Donnee_Html();
         donneeHtml.setUrl(wikiUrl);
-        donneeHtml.start();
-        donneeHtml.join();
+
         numberOfCSV = donneeHtml.getNbTableaux();
 
         for (int i = 1; i <= numberOfCSV; i++){
@@ -142,8 +141,7 @@ if(bool == true){
 
         Donnee_Wikitable donneeWikitable = new Donnee_Wikitable();
         donneeWikitable.setUrl(wikiUrl);
-        donneeWikitable.start();
-        donneeWikitable.join();
+
         numberOfCSV = donneeWikitable.getNbTableaux();
 
         for (int i = 1; i <= numberOfCSV; i++){
