@@ -30,19 +30,21 @@ public class WikiExtractMain {
 
 	public static void main(String[] args) throws MalformedURLException, IOException, UrlInvalideException, ExtractionInvalideException, ConversionInvalideException, ArticleInexistantException, ResultatEstNullException, InterruptedException {
 
-		Scanner entree = new Scanner(System.in);
+		//Scanner entree = new Scanner(System.in);
 		String choix = "";
 		//system.out.println("Quel type d'extraction voulez-vous realiser ? Entrez H pour HTML, W pour WIKITEXT ou bien X pour les deux en meme temps.");
 		System.out.println(args[1].equalsIgnoreCase("H"));
 		String url= args[0];
-		System.out.println(url);
+		System.out.println(args[1]);
 		if(args[1].equalsIgnoreCase("H")) {
 			System.out.println("Done H !");
 			lancerSimpleExtraction(true, url);
 			System.out.println("Done !");
 		}
 		else if (args[1].equalsIgnoreCase("W")) {
-			lancerSimpleExtraction(false, args[0]);
+			System.out.println("Done W !");
+			lancerSimpleExtraction(false, url);
+			System.out.println("Done !!!!!!");
 		}
 		/*else if (choix.equals("X")) {
 			lancerDoubleExtraction(args[0]);
@@ -50,7 +52,7 @@ public class WikiExtractMain {
 		else {
 			System.out.println("Les seules lettres acceptees sont H, W et X !");
 		}*/
-		entree.close();
+		//entree.close();
 	}
 
 
@@ -83,7 +85,6 @@ public class WikiExtractMain {
 		/*Donnee_Html fakeDonneeHtml = new Donnee_Html();
 		Donnee_Wikitable fakeDonneeWikitable = new Donnee_Wikitable();
 		double urlActuelle = 1.0;*/
-		System.out.printf("Extract ==> ", url);
 		Url urlx = new Url(new URL(url));
 		if (isHtml) {
 			Donnee_Html donnee_Html = new Donnee_Html();
@@ -105,14 +106,22 @@ public class WikiExtractMain {
 			//getStatistiques();
 		}
 		else {
-			for (Url urlValide : getUrlValides(url)) {
+			//for (Url urlValide : getUrlValides(url)) {
 			//	System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + urlValide.getTitre());
-				Donnee_Wikitable donnee_Wikitable= new Donnee_Wikitable();
+
+			Donnee_Wikitable donnee_Wikitable= new Donnee_Wikitable();
+
+				try {
+					donnee_Wikitable.extraire(urlx);
+
+				}catch (Exception e){
+					System.out.print("exception ");
+				}
 				//donnee_Wikitable.setUrl(urlValide);
 
 			//	updateComparerCSV(fakeDonneeHtml, donnee_Wikitable);
 				//urlActuelle++;
-			}
+			//}
 			//();
 		}
 

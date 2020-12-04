@@ -85,7 +85,6 @@ public class Donnee_Html extends Donnee {
 	public void extraire(Url url) throws UrlInvalideException, ExtractionInvalideException, IOException {
 		//startTimer();
 		boolean hasPage = true;
-		System.out.print("befoore extract");
 		url.estTitreValide();
 		url.estPageWikipedia();
 		String langue = url.getLangue();
@@ -125,19 +124,27 @@ public class Donnee_Html extends Donnee {
 		Elements tablesNonWiki = page.select("table:not([^])");
 		wikitables.addAll(tablesNonWiki);
 		int nbTableaux = wikitables.size();
-		this.nbTableauxExtraits += nbTableaux;
 		nbLignesColonnes(wikitables);
-		
+		this.nbTableauxExtraits += nbTableaux;
 		for (int i = 0 ; i < wikitables.size() ; i++) {
-			String outputPath = "output/HTML/" + titre + "-" + (i+1) + ".csv";
+			titre = titre.replace("_"," ");
+			String outputPath = "output/html/" + titre + " "+ " - Wikipedia" + ".csv";
+			File yourFile = new File(outputPath);
+			yourFile.createNewFile();
+			FileOutputStream oFile = new FileOutputStream(yourFile, false);
 			FileOutputStream outputStream = new FileOutputStream(outputPath);
+			System.out.print("ouuuuuuut");
 			OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-
+			System.out.print("afteeeeeer");
 			// On recupere le nmobre de lignes et de colonnes du tableau en cours
 			nbLignesGlob = getNbLignesTableaux().get(i);
+			System.out.print("nbLignesGlobbbbbbbbbbbbbbbbb" + nbLignesGlob);
 			nbColonnesGlob = getNbColonnesTableaux().get(i);
+			System.out.print("nbcoloonnGlobbbbbbbbbbbbbbbbb" + nbColonnesGlob);
+
 			// On initialise la matrice de donnees a la bonne taille
 			this.tableau = new String[nbLignesGlob][nbColonnesGlob];
+			System.out.print("this.tableauuuu" + this.tableau);
 			this.ligneActuelle = 0;
 			// On remplit toutes les lignes et colonnes de la matrice
 			for (String[] ligne: tableau) {
@@ -147,6 +154,7 @@ public class Donnee_Html extends Donnee {
 			this.rowspanFound.clear();
 
 			try {
+				System.out.print("wriiiiite");
 				stockerLignes(wikitables.get(i));
 				// On cree un fichier CSV en parcourant la matrice
 				ecrireTableau(writer);
@@ -338,6 +346,8 @@ public class Donnee_Html extends Donnee {
 	 * @throws IOException si erreur survenue
 	 */
 	private void ecrireTableau(OutputStreamWriter writer) throws IOException {
+		System.out.print("Ecriiiiiiiiiiire ====>" + writer  + "tableauuuuuuu ====> "+ this.tableau);
+
 		for (int i = 0; i < this.tableau.length; i++) {
 			boolean contientInfos = ligneContientInfos(i);
 			for (int j = 0; j < this.tableau[i].length; j++) {

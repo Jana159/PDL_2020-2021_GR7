@@ -65,14 +65,13 @@ public class Donnee_Wikitable extends Donnee{
             url1.estTitreValide();
             String langue = url1.getLangue();
             url = new URL("https://"+langue+".wikipedia.org/w/api.php?action=parse&oldid="+url1.getOldid()+"&prop=wikitext&format=json");
+
             StringBuilder result = new StringBuilder();
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null)
+            String inputLine ;
+            while (( inputLine = in.readLine() ) != null ) {
                 result.append(inputLine);
-
+            }
             in.close();
             return result.toString();
         } catch (Exception e) {
@@ -89,11 +88,14 @@ public class Donnee_Wikitable extends Donnee{
      */
     @Override
     public void extraire(Url url) throws  ExtractionInvalideException, IOException {
-        startTimer();
+      //  startTimer();
         url.estTitreValide();
         String titre = url.getTitre();
 
+        System.out.print(url.getURL());
         String json = recupContenu(url.getURL());
+
+
         if(!hasErrorOnPage(json)) {
             wikitable = jsonVersWikitable(json);
             wikitableVersCSV(titre,wikitable);
@@ -142,13 +144,14 @@ public class Donnee_Wikitable extends Donnee{
      * @throws ExtractionInvalideException
      */
     public void wikitableVersCSV(String titre, String wikitable) {
-
         wikitable = wikitableReplace(wikitable);
         ArrayList<String> tableaux  = reconstituerTable(wikitable);
         int i = 0;
         for (String table : tableaux) {
             try {
+
                 wikitableVersCSVAux2(table, titre, i + 1);
+                System.out.println("=====foooooor===== ");
                 i++;
             } catch (Exception e) {
                 System.out.println("Ectraction wikitext a échoué");
@@ -163,7 +166,9 @@ public class Donnee_Wikitable extends Donnee{
         ArrayList<String[]> tab = new ArrayList<>();
 
         String[] lines = wikitable.split("\n");
+
         for (String line : lines) {
+
             if(line.startsWith(" ") || line.startsWith("	"))
                 line = supprimerEspaceDebut(line);
             if (line.contains("{|")) {
@@ -177,7 +182,9 @@ public class Donnee_Wikitable extends Donnee{
                 saveFile(tab, title, nbTab);
             }
             if (tableau) {
+
                 if (first) {
+                    System.out.println("=====llll===== " + line.startsWith("!"));
                     if (line.startsWith("!")) {
                         tab.add(new String[nbColMax]);
                         if (line.contains("!!")) {
@@ -191,9 +198,11 @@ public class Donnee_Wikitable extends Donnee{
                                 tab.get(i)[j] = innerLine;
                                 j++;
                             }
+                            System.out.println("=====first===== " );
                         }
                         else {
                             line = formatLine(line);
+                            System.out.println("=====llll===== " + line);
                             if (line.contains("rowspan")) {
                                 nb = rowColSpan(line);
                                 for (int k = 0; k < nb; k++) {
@@ -205,6 +214,8 @@ public class Donnee_Wikitable extends Donnee{
                                         tab.get(i+k)[j] = getCell(line);
                                     }
                                 }
+                                System.out.println("=====row===== " );
+
                             }
                             else if (line.contains("colspan")) {
                                 nb = rowColSpan(line);
@@ -213,13 +224,19 @@ public class Donnee_Wikitable extends Donnee{
                                         tab.add(new String[nbColMax]);
                                     tab.get(i)[j] = getCell(line);
                                 }
+                                System.out.println("=====col===== " );
+
                             }
                             else {
                                 if (tab.size() <= i)
                                     tab.add(new String[nbColMax]);
                                 tab.get(i)[j] = getCell(line);
+                                System.out.println("=====ens===== " );
+
                             }
                             j++;
+                            System.out.println("=====iii=====");
+
                         }
                         first = false;
                     }
@@ -247,6 +264,8 @@ public class Donnee_Wikitable extends Donnee{
                                     }
                                 }
                                 j++;
+                                System.out.println("=====second===== " );
+
                             }
                             else if (line.contains("colspan")) {
                                 nb = rowColSpan(line);
@@ -306,12 +325,15 @@ public class Donnee_Wikitable extends Donnee{
                                     tab.get(i)[j] = getCell(innerLine);
                                     j++;
                                 }
+                                System.out.println("=====ennnd===== " );
+
                             }
                         }
                     }
                 }
             }
         }
+
     }
 
     public int countCol(String json){
@@ -405,7 +427,7 @@ public class Donnee_Wikitable extends Donnee{
 
 
     private void saveFile(ArrayList<String[]> tab, String title, int nbtab) throws IOException {
-        String outputPath = "output/wikitext/" + title +"-"+ nbtab + ".csv";
+        String outputPath = "output/wikitext/" + title +"- Java/Wikitext"+ nbtab + ".csv";
         FileOutputStream outputStream = new FileOutputStream(outputPath);
         OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
         int j, i = tab.size();

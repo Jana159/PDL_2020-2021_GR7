@@ -81,7 +81,9 @@ public class Url {
 		}
 		patternCell = Pattern.compile("(.)*oldid=([0-9]+)");
 		matcher = patternCell.matcher(url.toString());
+
 		if (matcher.matches()) {
+
 			oldid = matcher.group(2);
 		}
 		return true;
