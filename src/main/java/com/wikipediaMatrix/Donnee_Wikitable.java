@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
 /**
@@ -17,7 +20,9 @@ import org.json.JSONObject;
  * @author Groupe 4
  *
  */
-
+@Getter
+@Setter
+@Slf4j
 public class Donnee_Wikitable extends Donnee{
 
     private String wikitable;
@@ -26,7 +31,7 @@ public class Donnee_Wikitable extends Donnee{
     private String[][] tab;
     private int maxLigne = 0;
     private int maxColone = 0;
-    private int nbTableauxExtraits = 0;
+    private int nbTableaux = 0;
     private Url url;
 
 
@@ -34,25 +39,6 @@ public class Donnee_Wikitable extends Donnee{
         this.wikitable = "";
         this.tab = new String[500][200];
         initTab();
-
-    }
-
-    public void setUrl(Url url) {
-        this.url = url;
-    }
-
-    public void setWikitable(String wikitable) {
-        this.wikitable = wikitable;
-    }
-
-    public String getWikitable() {
-        return this.wikitable;
-    }
-
-
-
-    public String getContenu() {
-        return this.wikitable;
     }
 
     @Override
@@ -65,15 +51,7 @@ public class Donnee_Wikitable extends Donnee{
             url1.estTitreValide();
             String langue = url1.getLangue();
             url = new URL("https://"+langue+".wikipedia.org/w/api.php?action=parse&oldid="+url1.getOldid()+"&prop=wikitext&format=json");
-
-            StringBuilder result = new StringBuilder();
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-            String inputLine ;
-            while (( inputLine = in.readLine() ) != null ) {
-                result.append(inputLine);
-            }
-            in.close();
-            return result.toString();
+            return getBuilder(url);
         } catch (Exception e) {
             throw new ExtractionInvalideException("Recuperation du contenu impossible");
         }
@@ -92,8 +70,8 @@ public class Donnee_Wikitable extends Donnee{
         url.estTitreValide();
         String titre = url.getTitre();
 
-        System.out.print(url.getURL());
-        String json = recupContenu(url.getURL());
+        log.info(String.valueOf(url.getUrl()));
+        String json = recupContenu(url.getUrl());
 
 
         if(!hasErrorOnPage(json)) {
@@ -101,7 +79,7 @@ public class Donnee_Wikitable extends Donnee{
             wikitableVersCSV(titre,wikitable);
         }
         else {
-            System.out.println("La page " + titre + "ne permet pas d'extraction en json");
+            log.error("La page " + titre + "ne permet pas d'extraction en json");
         }
     }
 
@@ -151,10 +129,10 @@ public class Donnee_Wikitable extends Donnee{
             try {
 
                 wikitableVersCSVAux2(table, titre, i + 1);
-                System.out.println("=====foooooor===== ");
+                log.debug("=====foooooor===== ");
                 i++;
             } catch (Exception e) {
-                System.out.println("Ectraction wikitext a échoué");
+                log.error("Ectraction wikitext a échoué");
             }
         }
     }
@@ -184,7 +162,7 @@ public class Donnee_Wikitable extends Donnee{
             if (tableau) {
 
                 if (first) {
-                    System.out.println("=====llll===== " + line.startsWith("!"));
+                    log.debug("=====llll===== " + line.startsWith("!"));
                     if (line.startsWith("!")) {
                         tab.add(new String[nbColMax]);
                         if (line.contains("!!")) {
@@ -198,11 +176,11 @@ public class Donnee_Wikitable extends Donnee{
                                 tab.get(i)[j] = innerLine;
                                 j++;
                             }
-                            System.out.println("=====first===== " );
+                            log.debug("=====first===== " );
                         }
                         else {
                             line = formatLine(line);
-                            System.out.println("=====llll===== " + line);
+                           log.debug("=====llll===== " + line);
                             if (line.contains("rowspan")) {
                                 nb = rowColSpan(line);
                                 for (int k = 0; k < nb; k++) {
@@ -214,7 +192,7 @@ public class Donnee_Wikitable extends Donnee{
                                         tab.get(i+k)[j] = getCell(line);
                                     }
                                 }
-                                System.out.println("=====row===== " );
+                                log.debug("=====row===== " );
 
                             }
                             else if (line.contains("colspan")) {
@@ -224,18 +202,18 @@ public class Donnee_Wikitable extends Donnee{
                                         tab.add(new String[nbColMax]);
                                     tab.get(i)[j] = getCell(line);
                                 }
-                                System.out.println("=====col===== " );
+                                log.debug("=====col===== " );
 
                             }
                             else {
                                 if (tab.size() <= i)
                                     tab.add(new String[nbColMax]);
                                 tab.get(i)[j] = getCell(line);
-                                System.out.println("=====ens===== " );
+                                log.debug("=====ens===== " );
 
                             }
                             j++;
-                            System.out.println("=====iii=====");
+                            log.debug("=====iii=====");
 
                         }
                         first = false;
@@ -251,39 +229,11 @@ public class Donnee_Wikitable extends Donnee{
                         if (!line.contains("||")) {
                             line = formatLine(line);
                             if (line.contains("rowspan")) {
-                                nb = rowColSpan(line);
-                                for (int k = 0; k < nb; k++) {
-                                    if (tab.size() <= i+k) {
-                                        String[] tabLine = new String[nbColMax];
-                                        tabLine[j] = getCell(line);
-                                        tab.add(tabLine);
-                                    } else {
-                                        while (tab.get(i+k)[j] != null)
-                                            j++;
-                                        tab.get(i+k)[j] = getCell(line);
-                                    }
-                                }
-                                j++;
-                                System.out.println("=====second===== " );
-
-                            }
-                            else if (line.contains("colspan")) {
-                                nb = rowColSpan(line);
-                                for (int k = 0; k < nb; k++) {
-                                    if (tab.size() <= i)
-                                        tab.add(new String[nbColMax]);
-                                    tab.get(i)[j] = getCell(line);
-                                    j++;
-
-                                }
+                                j = withRowspan(i, j, nbColMax, tab, line);
+                                log.debug("=====second===== " );
                             }
                             else {
-                                if (tab.size() <= i)
-                                    tab.add(new String[nbColMax]);
-                                while (tab.get(i)[j] != null)
-                                    j++;
-                                tab.get(i)[j] = getCell(line);
-                                j++;
+                                j = withColspan(i, j, nbColMax, tab, line);
                             }
                         }
                         else {
@@ -293,39 +243,10 @@ public class Donnee_Wikitable extends Donnee{
                                 innerLine = formatLine(innerLine);
                                 innerLine = innerLine.trim();
                                 if (innerLine.contains("rowspan")) {
-                                    nb = rowColSpan(innerLine);
-                                    for (int k = 0; k < nb; k++) {
-                                        if (tab.size() <= i+k) {
-                                            String[] tabLine = new String[nbColMax];
-                                            tabLine[j] = getCell(innerLine);
-                                            tab.add(tabLine);
-                                        } else {
-                                            while (tab.get(i+k)[j] != null)
-                                                j++;
-                                            tab.get(i+k)[j] = getCell(innerLine);
-                                        }
-                                    }
-                                    j++;
+                                    j = withRowspan(i, j, nbColMax, tab, innerLine);
                                 }
-                                else if (innerLine.contains("colspan")) {
-                                    nb = rowColSpan(innerLine);
-                                    for (int k = 0; k < nb; k++) {
-                                        if (tab.size() <= i)
-                                            tab.add(new String[nbColMax]);
-                                        tab.get(i)[j] = getCell(innerLine);
-                                        j++;
-
-                                    }
-                                }
-                                else {
-                                    if (tab.size() <= i)
-                                        tab.add(new String[nbColMax]);
-                                    while (tab.get(i)[j] != null)
-                                        j++;
-                                    tab.get(i)[j] = getCell(innerLine);
-                                    j++;
-                                }
-                                System.out.println("=====ennnd===== " );
+                                else j = withColspan(i, j, nbColMax, tab, innerLine);
+                                log.debug("=====ennnd===== " );
 
                             }
                         }
@@ -334,6 +255,47 @@ public class Donnee_Wikitable extends Donnee{
             }
         }
 
+    }
+
+    private int withColspan(int i, int j, int nbColMax, ArrayList<String[]> tab, String line) {
+        int nb;
+        if (line.contains("colspan")) {
+            nb = rowColSpan(line);
+            for (int k = 0; k < nb; k++) {
+                if (tab.size() <= i)
+                    tab.add(new String[nbColMax]);
+                tab.get(i)[j] = getCell(line);
+                j++;
+
+            }
+        }
+        else {
+            if (tab.size() <= i)
+                tab.add(new String[nbColMax]);
+            while (tab.get(i)[j] != null)
+                j++;
+            tab.get(i)[j] = getCell(line);
+            j++;
+        }
+        return j;
+    }
+
+    private int withRowspan(int i, int j, int nbColMax, ArrayList<String[]> tab, String line) {
+        int nb;
+        nb = rowColSpan(line);
+        for (int k = 0; k < nb; k++) {
+            if (tab.size() <= i+k) {
+                String[] tabLine = new String[nbColMax];
+                tabLine[j] = getCell(line);
+                tab.add(tabLine);
+            } else {
+                while (tab.get(i+k)[j] != null)
+                    j++;
+                tab.get(i+k)[j] = getCell(line);
+            }
+        }
+        j++;
+        return j;
     }
 
     public int countCol(String json){
@@ -419,8 +381,7 @@ public class Donnee_Wikitable extends Donnee{
         Pattern patternCell = Pattern.compile(" *((col|row)span=\"?([0-9]+)\"? ?)?((.)*)");
         Matcher matcher = patternCell.matcher(line);
         if (matcher.matches()) {
-            String val = matcher.group(4);
-            return val;
+            return matcher.group(4);
         }
         return "";
     }
@@ -446,7 +407,7 @@ public class Donnee_Wikitable extends Donnee{
             }
         }
         writer.close();
-        nbTableauxExtraits++;
+        nbTableaux++;
     }
 
     /**
@@ -520,26 +481,11 @@ public class Donnee_Wikitable extends Donnee{
     @Override
     public boolean pageComporteTableau() throws ExtractionInvalideException {
         if(!wikitable.contains("{|")){
-            System.out.println(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
+            log.info(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
             return false;
         }
+        nbTableaux++;
         return true;
-    }
-
-    /**
-     * Renvoie le nombre de colonnes ecrites pour la page courante
-     * @return
-     */
-    public int getColonnesEcrites() {
-        return colonnesEcrites;
-    }
-
-    /**
-     * Renvoie le nombre de lignes ecrites pour la page courante
-     * @return
-     */
-    public int getLignesEcrites() {
-        return lignesEcrites;
     }
 
     /**
@@ -547,6 +493,6 @@ public class Donnee_Wikitable extends Donnee{
      */
     @Override
     public int getNbTableaux() {
-        return this.nbTableauxExtraits;
+        return this.nbTableaux;
     }
 }

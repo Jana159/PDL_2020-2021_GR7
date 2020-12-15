@@ -1,9 +1,9 @@
 package com.wikipediaMatrix;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,11 +15,17 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static org.junit.Assert.*;
+
 /**
  * 
  * @author Groupe 5
  *
  */
+
+@Getter
+@Setter
+@Slf4j
 public class Donnee_HtmlTest {
 
 	// On "mock" les classes qui vont être utilisees dans le test
@@ -79,5 +85,21 @@ public class Donnee_HtmlTest {
 			wikitables.add(element);
 		}
 		assertTrue(wikitables.size() == 3);
+	}
+
+	@Test
+	public void getNbTableaux2() {
+		Donnee_Html donnee_Html = new Donnee_Html();
+		donnee_Html.setHtml("");
+		Document page = Jsoup.parseBodyFragment(donnee_Html.getHtml());
+		Elements wikitables = page.getElementsByClass("wikitable");
+		assertEquals(0, wikitables.size());
+	}
+
+	@Test
+	public void pageNecomporteTableau() throws ExtractionInvalideException {
+		Donnee_Html donnee_HtmlTest  = new Donnee_Html();
+		donnee_HtmlTest.setHtml("<html><head></head><body>wikitable</table></body></html>");
+		assertFalse(donnee_HtmlTest.pageComporteTableau());
 	}
 }

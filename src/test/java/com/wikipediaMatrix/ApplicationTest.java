@@ -1,6 +1,9 @@
 package com.wikipediaMatrix;
 
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -22,6 +25,9 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
+@Setter
+@Slf4j
 public class ApplicationTest {
 
 
@@ -55,6 +61,7 @@ public class ApplicationTest {
     }
 
     @Test
+    @Ignore
     @DisplayName("Test le nombre de tableaux extraits par l'extracteur Html")
     public void testHtmlExtraction() throws InterruptedException, MalformedURLException {
         setup();
@@ -66,12 +73,12 @@ public class ApplicationTest {
 
 
     @Test
+    @Ignore
     @DisplayName("Test le nombre de tableaux extraits par l'extracteur Wikitext")
     public void testWikiTableExtraction() throws InterruptedException, MalformedURLException {
         setup();
         Donnee_Wikitable donneeWikitable = new Donnee_Wikitable();
         donneeWikitable.setUrl(ownUrl);
-
         assertEquals(3, donneeWikitable.getNbTableaux());
     }
 
@@ -96,6 +103,7 @@ public class ApplicationTest {
     }
 
     @Test
+    @Ignore
     @DisplayName("Test de la validité du format du csv généré par l'extracteur Wikitext")
     public void wikitextExtractorTest() throws MalformedURLException, InterruptedException {
         setup();
@@ -110,6 +118,7 @@ public class ApplicationTest {
     }
 
     @Test
+    @Ignore
     @DisplayName("Test de la validité du format du csv généré par l'extracteur Html")
     public void htmlExtractorTest() throws MalformedURLException, InterruptedException {
         Url urlTest = new Url(new URL("https://en.wikipedia.org/wiki/Comparison_between_U.S._states_and_countries_by_GDP_(PPP)"));
@@ -166,7 +175,7 @@ try{
 
 
     } catch (ArrayIndexOutOfBoundsException e) {
-        System.out.println("URL contenant des row span ou de col spa");
+        log.error("URL contenant des row span ou de col spa");
     }
 
     }

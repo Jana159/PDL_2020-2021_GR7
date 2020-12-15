@@ -7,6 +7,9 @@ import java.net.URL;
 import java.util.HashSet;
 
 import com.wikipediaMatrix.exception.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -18,6 +21,9 @@ import static junit.framework.TestCase.fail;
  * @author Groupe 4
  *
  */
+@Getter
+@Setter
+@Slf4j
 public class WikiExtractMainTest {	
 
 	int nbTablesHtml, nbLignesHtml, nbColonnesHtml, tempsExeHtml, nbTablesWikitext, nbLignesWikitext, nbColonnesWikitext, tempsExeWikitext = 0;
@@ -31,7 +37,7 @@ public class WikiExtractMainTest {
 	 * @throws InterruptedException si erreur survenue
 	 */
 	@Test
-
+	@Ignore
 	public void lancerExtraction() throws UrlInvalideException, IOException, ResultatEstNullException, InterruptedException {
 		String BASE_WIKIPEDIA_URL = "output/url_test.txt";
 		BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
@@ -43,7 +49,7 @@ public class WikiExtractMainTest {
 				Donnee_Html testHtml = new Donnee_Html();
 				Donnee_Wikitable testWikitable = new Donnee_Wikitable();
 				ComparerCSV comparerCsv = new ComparerCSV(testHtml, testWikitable);
-				System.out.println(urlActuelle/336*100 + "% - Extraction de la page " + wikiUrl.getTitre());
+				log.info(urlActuelle/336*100 + "% - Extraction de la page " + wikiUrl.getTitre());
 				testHtml.setUrl(wikiUrl);
 
 				testWikitable.setUrl(wikiUrl);
@@ -53,7 +59,7 @@ public class WikiExtractMainTest {
 				nbColonnesHtml += comparerCsv.getColonnesHtml();
 				nbLignesHtml += comparerCsv.getLignesHtml();
 				tempsExeHtml += comparerCsv.getTempsExeHtml();
-				nbTablesWikitext += comparerCsv.getTablesWikitable();
+				nbTablesWikitext += comparerCsv.getTablesWikitext();
 				nbColonnesWikitext += comparerCsv.getColonnesWikitable();
 				nbLignesWikitext += comparerCsv.getLignesWikitable();
 				tempsExeWikitext += comparerCsv.getTempsExeWikitable();
@@ -62,19 +68,19 @@ public class WikiExtractMainTest {
 		}
 		long tempsExeTotal = (System.currentTimeMillis());
 		br.close();
-		System.out.println("Temps d'execution : " + tempsExeTotal/1000 + " secondes");
-		System.out.println("-----------STATISTIQUES-----------");
-		System.out.println("- HTML - Temps d'execution : " + (tempsExeTotal - tempsExeWikitext)/1000 + " secondes.");
-		System.out.println("Nombre de tableaux parsés: " + nbTablesHtml + ", lignes parsées : " + nbLignesHtml + ", colonnes parsées : " + nbColonnesHtml);
-		System.out.println("- WIKITEXT - Temps d'execution : " + tempsExeWikitext/1000 + " secondes.");
-		System.out.println("Nombre de tableaux parsés: " + nbTablesWikitext + ", lignes parsées : " + nbLignesWikitext + ", colonnes parsées : " + nbColonnesWikitext);
+		log.info("Temps d'execution : " + tempsExeTotal/1000 + " secondes");
+		log.info("-----------STATISTIQUES-----------");
+		log.info("- HTML - Temps d'execution : " + (tempsExeTotal - tempsExeWikitext)/1000 + " secondes.");
+		log.info("Nombre de tableaux parsés: " + nbTablesHtml + ", lignes parsées : " + nbLignesHtml + ", colonnes parsées : " + nbColonnesHtml);
+		log.info("- WIKITEXT - Temps d'execution : " + tempsExeWikitext/1000 + " secondes.");
+		log.info("Nombre de tableaux parsés: " + nbTablesWikitext + ", lignes parsées : " + nbLignesWikitext + ", colonnes parsées : " + nbColonnesWikitext);
 	}
 
 
 	@Test
 	public void getUrlValidesTest() {
 		try {
-			HashSet<Url> lesUrlValides = new HashSet<Url>();
+			HashSet<Url> lesUrlValides = new HashSet<>();
 			String BASE_WIKIPEDIA_URL = "output/url_test.txt";
 			BufferedReader br = new BufferedReader(new FileReader(BASE_WIKIPEDIA_URL));
 			String url;

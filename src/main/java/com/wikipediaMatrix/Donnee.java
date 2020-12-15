@@ -13,6 +13,9 @@ import com.wikipediaMatrix.exception.ArticleInexistantException;
 import com.wikipediaMatrix.exception.ConversionInvalideException;
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -23,23 +26,17 @@ import org.jsoup.select.Elements;
  *
  */
 
+@Getter
+@Setter
+@Slf4j
 public abstract class Donnee{
 
 	private long tempsOriginal;
-	private Map<Integer, Integer> nbLignesTableaux = new HashMap<Integer, Integer>();
-	private Map<Integer, Integer> nbColonnesTableaux = new HashMap<Integer, Integer>();;
+	private Map<Integer, Integer> nbLignesTableaux = new HashMap<>();
+	private Map<Integer, Integer> nbColonnesTableaux = new HashMap<>();
 	private int nbTableaux = 0;
 	public static CyclicBarrier newBarrier = new CyclicBarrier(2);
 
-
-
-	public Map<Integer, Integer> getNbLignesTableaux() {
-		return nbLignesTableaux;
-	}
-
-	public Map<Integer, Integer> getNbColonnesTableaux() {
-		return nbColonnesTableaux;
-	}
 
 	/**
 	 * A partir d'une Url, determine de combien de lignes et de colonnes
@@ -189,5 +186,17 @@ public abstract class Donnee{
 	 */
 	public long getTime(){
 		return System.currentTimeMillis() - tempsOriginal;
+	}
+
+
+	public static String getBuilder(URL url) throws IOException {
+		StringBuilder result = new StringBuilder();
+		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+		String inputLine ;
+		while (( inputLine = in.readLine() ) != null ) {
+			result.append(inputLine);
+		}
+		in.close();
+		return result.toString();
 	}
 }

@@ -1,5 +1,8 @@
 package com.wikipediaMatrix;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,6 +14,9 @@ import java.net.URL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@Getter
+@Setter
+@Slf4j
 public class BenchTest {
 
     /*
@@ -20,6 +26,7 @@ public class BenchTest {
      *  see below for more details
      **/
     @Test
+    @Ignore
     public void testBenchExtractors() throws Exception {
 
         // directory where CSV files are exported (HTML extractor)
@@ -39,19 +46,19 @@ public class BenchTest {
         Donnee_Wikitable donneeWikitable;
 
         while ((url = br.readLine()) != null) {
-            System.out.println("Wikipedia url: " + url);
+            log.info("Wikipedia url: " + url);
 
             Url wikiUrl = new Url(new URL(url));
             assertTrue(wikiUrl.estTitreValide());
 
-            System.out.println("\nCSV page name: " + wikiUrl.getTitre());
+            log.info("\nCSV page name: " + wikiUrl.getTitre());
 
             donneeHtml = new Donnee_Html();
             donneeHtml.setUrl(wikiUrl);
 
             numberOfCSV = donneeHtml.getNbTableaux();
             for (int i = 1; i <= numberOfCSV; i++){
-                System.out.println("CSV generate : " + mkCSVFileName(outputDirHtml + wikiUrl.getTitre(), i));
+                log.info("CSV generate : " + mkCSVFileName(outputDirHtml + wikiUrl.getTitre(), i));
             }
 
 
@@ -60,7 +67,7 @@ public class BenchTest {
 
             numberOfCSV = donneeHtml.getNbTableaux();
             for (int i = 1; i <= numberOfCSV; i++){
-                System.out.println("CSV generate : " + mkCSVFileName(outputDirWikitext + wikiUrl.getTitre(), i));
+                log.info("CSV generate : " + mkCSVFileName(outputDirWikitext + wikiUrl.getTitre(), i));
             }
 
             nurl++;

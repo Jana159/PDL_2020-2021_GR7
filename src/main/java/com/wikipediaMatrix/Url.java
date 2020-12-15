@@ -2,6 +2,9 @@ package com.wikipediaMatrix;
 
 import com.wikipediaMatrix.exception.ArticleInexistantException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -16,6 +19,9 @@ import java.util.regex.Pattern;
  * @author Groupe 4
  *
  */
+@Getter
+@Setter
+@Slf4j
 public class Url {
 
 	private URL url;
@@ -51,7 +57,7 @@ public class Url {
 	public boolean estPageWikipedia() throws UrlInvalideException {
 		try {
 
-			String debutURL = url.toString().substring(0, url.toString().lastIndexOf('/')+1);;
+			String debutURL = url.toString().substring(0, url.toString().lastIndexOf('/')+1);
 			if (!debutURL.matches("https://(fr|en).wikipedia.org/(w|wiki)/")) {
 				//throw new UrlInvalideException("URL non prise en charge");
 				return false;
@@ -71,7 +77,7 @@ public class Url {
 		titre = url.toString().substring(url.toString().lastIndexOf('/')+1);
 		// "\p{Graph}" -> chiffre, lettre, ponctuation
 		if (!titre.matches("^[\\p{Graph}å\\–]+$")) {
-			System.out.println(new MalformedURLException("Titre de la page invalide"));
+			log.info(String.valueOf(new MalformedURLException("Titre de la page invalide")));
 			return false;
 		}
 		Pattern patternCell = Pattern.compile("(.)*title=((.)+)&(.)*");
@@ -111,39 +117,15 @@ public class Url {
 
 	/**
 	 * Methode implementant verifiant l'url dans sa globalite:
-	 * - url provenant de wikipedia 
+	 * - url provenant de wikipedia
 	 * - page en anglais ou en francais
 	 * - titre de page existant
-	 * - test de la connexion a la page 
+	 * - test de la connexion a la page
 	 * @return true si url valide et connexion reussie, false sinon
 	 * @throws UrlInvalideException si l'url est invalide
 	 * @throws MalformedURLException si url n'est pas correcte
 	 */
 	public boolean estUrlValide() throws UrlInvalideException, MalformedURLException {
 		return estTitreValide() && estPageWikipedia() /*&& testerConnexionHTTP()*/;
-	}
-
-	/**
-	 * Recuperer l'URL 
-	 * @return String url
-	 */
-	public URL getURL() {
-		return this.url;
-	}
-
-	/**
-	 * Recuperer le titre de la page url
-	 * @return String titre
-	 */
-	public String getTitre(){
-		return this.titre.toString();
-	}
-
-	/**
-	 * Recuperer la langue de la page url
-	 * @return String langue
-	 */
-	public String getLangue() {
-		return this.langue;
 	}
 }

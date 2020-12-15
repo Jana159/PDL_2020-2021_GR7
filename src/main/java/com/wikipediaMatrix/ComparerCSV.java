@@ -1,6 +1,9 @@
 package com.wikipediaMatrix;
 
 import com.wikipediaMatrix.exception.ResultatEstNullException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Classe permettant de recuperer dse statistiques sur les deux methodes de recuperation de table wikipedia,
@@ -8,6 +11,9 @@ import com.wikipediaMatrix.exception.ResultatEstNullException;
  * @author Groupe 5
  *
  */
+@Getter
+@Setter
+@Slf4j
 public class ComparerCSV {
 
 	private Donnee_Html html;
@@ -20,7 +26,7 @@ public class ComparerCSV {
 	private int lignesWikitable;
 	private int colonnesHtml;
 	private int colonnesWikitable;
-	
+
 	/**
 	 * Constructure de ComparerCSV, a instancier pour chaque pgaage wikipedia
 	 * @param html l'objet gerant le parsing du html au csv
@@ -45,7 +51,7 @@ public class ComparerCSV {
 		this.tablesHtml = html.getNbTableaux();
 		this.tablesWikitext = wikitable.getNbTableaux();
 	}
-	
+
 	public Donnee_Html getHtml() throws ResultatEstNullException {
 		if(html == null) throw new ResultatEstNullException("tablesHtml n'est pas de type int");
 		return html;
@@ -54,45 +60,5 @@ public class ComparerCSV {
 	public Donnee_Wikitable getWikitable() throws ResultatEstNullException {
 		if(wikitable == null) throw new ResultatEstNullException("tablesHtml n'est pas de type int");
 		return wikitable;
-	}
-
-	public long getTempsExeHtml() throws ResultatEstNullException {
-		if(tempsExeHtml != tempsExeHtml) throw new ResultatEstNullException("tempsExeHtml n'est pas de type long");
-		return tempsExeHtml;
-	}
-
-	public long getTempsExeWikitable() throws ResultatEstNullException {
-		if(tempsExeWikitable != tempsExeWikitable) throw new ResultatEstNullException("tempsExeWikitable n'est pas de type long");
-		return tempsExeWikitable;
-	}
-
-	public int getLignesHtml() throws ResultatEstNullException {
-		if(lignesHtml != lignesHtml) throw new ResultatEstNullException("lignesHtml n'est pas de type int");
-		return lignesHtml;
-	}
-
-	public int getLignesWikitable() throws ResultatEstNullException {
-		if(lignesWikitable != lignesWikitable) throw new ResultatEstNullException("lignesWikitable n'est pas de type int");
-		return lignesWikitable;
-	}
-
-	public int getColonnesHtml() throws ResultatEstNullException {
-		if(colonnesHtml != colonnesHtml) throw new ResultatEstNullException("colonnesHtml n'est pas de type int");
-		return colonnesHtml;
-	}
-
-	public int getColonnesWikitable() throws ResultatEstNullException {
-		if(colonnesWikitable != colonnesWikitable) throw new ResultatEstNullException("colonnesWikitable n'est pas de type int");
-		return colonnesWikitable;
-	}
-
-	public int getTablesHtml() throws ResultatEstNullException {
-		if(tablesHtml != tablesHtml) throw new ResultatEstNullException("tablesHtml n'est pas de type int");
-		return tablesHtml;
-	}
-
-	public int getTablesWikitable() throws ResultatEstNullException {
-		if(tablesWikitext != tablesWikitext) throw new ResultatEstNullException("tablesWikitext n'est pas de type int");
-		return tablesWikitext;
 	}
 }

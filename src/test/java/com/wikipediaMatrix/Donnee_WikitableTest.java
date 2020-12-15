@@ -6,6 +6,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -14,6 +21,10 @@ import org.junit.Test;
  * @author Groupe 5
  *
  */
+
+@Getter
+@Setter
+@Slf4j
 public class Donnee_WikitableTest {
 
 	/**
@@ -60,5 +71,23 @@ public class Donnee_WikitableTest {
 		Donnee_Wikitable donnee_WikitextTest = new Donnee_Wikitable();
 		String test = donnee_WikitextTest.supprimerEspaceDebut("   wikitexte");
 		assertEquals(test, "wikitexte");
+	}
+
+	@Test
+	public void getNbTableaux() throws ExtractionInvalideException {
+		Donnee_Wikitable donnee_Wikitext = new Donnee_Wikitable();
+		donnee_Wikitext.setWikitable("");
+		donnee_Wikitext.pageComporteTableau();
+		int wikitables = donnee_Wikitext.getNbTableaux();
+		assertEquals(0, wikitables);
+	}
+
+	@Test
+	public void getNbTableaux2() throws ExtractionInvalideException {
+		Donnee_Wikitable donnee_Wikitext = new Donnee_Wikitable();
+		donnee_Wikitext.setWikitable("{| class=\"wikitable\" |}");
+		donnee_Wikitext.pageComporteTableau();
+		int wikitables = donnee_Wikitext.getNbTableaux();
+		assertEquals(1, wikitables);
 	}
 }

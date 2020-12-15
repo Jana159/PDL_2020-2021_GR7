@@ -1,5 +1,8 @@
 package com.wikipediaMatrix;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
@@ -19,6 +22,10 @@ import static org.junit.Assert.assertTrue;
  * Classe de tests qui vérifie si l'url est valide et corresponds au CSV récupéré
  *
  */
+
+@Getter
+@Setter
+@Slf4j
 public class ProofTest {
 
         String BASE_WIKIPEDIA_URL = "output/proof.txt";
@@ -40,7 +47,7 @@ public class ProofTest {
 
             while ((url = br.readLine()) != null) {
                 bool = testHTMLUrl(url);
-                System.out.println("Vérification de : " + url + " : " + bool);
+                log.info("Vérification de : " + url + " : " + bool);
 if(bool == true){
     assertTrue(bool);
 
@@ -50,9 +57,9 @@ if(bool == true){
 
 
         } catch (FileNotFoundException e) {
-            System.out.println("Erreur lors de la lecture du fichier");
+            log.error("Erreur lors de la lecture du fichier");
         } catch (IOException e) {
-            System.out.println("Erreur lors de la lecture de la ligne");
+            log.error("Erreur lors de la lecture de la ligne");
         }
 
     }
@@ -70,16 +77,16 @@ if(bool == true){
             while ((url = br.readLine()) != null) {
 
                 bool = testWIKILUrl(url);
-                System.out.println("Vérification de : " + url + " : " + bool);
+                log.info("Vérification de : " + url + " : " + bool);
 
                 assertTrue(bool);
             }
 
 
         } catch (FileNotFoundException e) {
-            System.out.println("Erreur lors de la lecture du fichier");
+            log.error("Erreur lors de la lecture du fichier");
         } catch (IOException e) {
-            System.out.println("Erreur lors de la lecture de la ligne");
+            log.error("Erreur lors de la lecture de la ligne");
         }
 
     }
@@ -94,6 +101,7 @@ if(bool == true){
      * @throws MalformedURLException si l'url n'est pas correcte
      * @throws InterruptedException s'il y a une erreur à l'extraction
      */
+
     private boolean testHTMLUrl(String url) throws MalformedURLException, InterruptedException {
         CSVValidator csvValidator = CSVValidator.getInstance();
         int numberOfCSV;

@@ -4,6 +4,9 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 
 import java.io.FileReader;
@@ -20,6 +23,10 @@ import static org.toilelibre.libe.curl.Curl.curl;
  *
  * @author Groupe 5
  */
+
+@Getter
+@Setter
+@Slf4j
 public class CSVValidator {
 
     /**
@@ -50,18 +57,6 @@ public class CSVValidator {
     public static CSVValidator getInstance() {
         return csvValidator;
     }
-
-
-    /**
-     * Redéfinir le repertoire par défaut
-     *
-     * @param path nouveau répertoire par défaut
-     */
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-
 
     /**
      * Permet de vérifier si un csv est valide
@@ -125,7 +120,7 @@ public class CSVValidator {
      * @return une liste formater
      */
     public List<String[]> correctLinesCSV(List<String[]> list) {
-        List<String[]> listAux = new ArrayList<String[]>();
+        List<String[]> listAux = new ArrayList<>();
 
         for (String[] s : list) {
             if (!(s.length == 1 && s[0].trim().equals(""))) {

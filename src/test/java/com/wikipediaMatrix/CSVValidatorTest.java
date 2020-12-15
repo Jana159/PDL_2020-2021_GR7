@@ -1,5 +1,8 @@
 package com.wikipediaMatrix;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Classe de tests that checks if the CSV is valid and
  *
  */
+
+@Getter
+@Setter
+@Slf4j
 public class CSVValidatorTest {
 
     /**
@@ -31,25 +38,25 @@ public class CSVValidatorTest {
     public void checkCSVTest1() {
         byte count = 0;
 
-        System.out.println("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
+        log.debug("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
 
-        System.out.println("Validation of good.csv");
+        log.debug("Validation of good.csv");
         count += validator.checkCSVWithSeparator("csv/good.csv", ';') ? 1 : 0;
-        System.out.println("Validation of perfect.csv");
+        log.debug("Validation of perfect.csv");
         count += validator.checkCSVWithSeparator("csv/perfect.csv", ',') ? 1 : 0;
-        System.out.println("Validation of perfect_colon.csv");
+        log.debug("Validation of perfect_colon.csv");
         count += validator.checkCSVWithSeparator("csv/perfect_colon.csv", ':') ? 1 : 0;
-        System.out.println("Validation of perfect_pipe.csv");
+        log.debug("Validation of perfect_pipe.csv");
         count += validator.checkCSVWithSeparator("csv/perfect_pipe.csv", '|') ? 1 : 0;
-        System.out.println("Validation of perfect_semicolon.csv");
+        log.debug("Validation of perfect_semicolon.csv");
         count += validator.checkCSVWithSeparator("csv/perfect_semicolon.csv", ';') ? 1 : 0;
-        System.out.println("Validation of perfect_tab.csv");
+        log.debug("Validation of perfect_tab.csv");
         count += validator.checkCSVWithSeparator("csv/perfect_tab.csv", '\t') ? 1 : 0;
 
-        System.out.println("Validation of double_quote.csv");
+        log.debug("Validation of double_quote.csv");
         count += validator.checkCSVWithSeparator("csv/double_quote.csv", ',') ? 1 : 0;
 
-        System.out.println("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
+        log.debug("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
 
         assertEquals(7, count);
 
@@ -63,18 +70,18 @@ public class CSVValidatorTest {
         CSVValidator validator = CSVValidator.getInstance();
         byte count = 0;
 
-        System.out.println("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
+        log.debug("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
 
-        System.out.println("Validation of bad.csv");
+        log.debug("Validation of bad.csv");
         count += validator.checkCSVWithSeparator("csv/bad.csv", ';') ? 1 : 0;
-        System.out.println("Validation of mult_long_columns.csv");
+        log.debug("Validation of mult_long_columns.csv");
         count += validator.checkCSVWithSeparator("csv/mult_long_columns.csv", ',') ? 1 : 0;
-        System.out.println("Validation of mult_long_columns_tabs.csv");
+        log.debug("Validation of mult_long_columns_tabs.csv");
         count += validator.checkCSVWithSeparator("csv/mult_long_columns_tabs.csv", '\t') ? 1 : 0;
-        System.out.println("Validation of one_long_column.csv");
+        log.debug("Validation of one_long_column.csv");
         count += validator.checkCSVWithSeparator("csv/one_long_column.csv", ',') ? 1 : 0;
 
-        System.out.println("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
+        log.debug("| --------------------------------------- VALIDATION DE CSV --------------------------------------- |\n");
 
         assertEquals(0, count);
     }
@@ -86,7 +93,7 @@ public class CSVValidatorTest {
     public void checkCSVWithSeparatorTest() {
         CSVValidator validator = CSVValidator.getInstance();
 
-        System.out.println("Validation of extract_csv.csv");
+        log.debug("Validation of extract_csv.csv");
         Assert.assertTrue(validator.checkCSVWithSeparator("csv/extract_csv.csv", ';'));
     }
 

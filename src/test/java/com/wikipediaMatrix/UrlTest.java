@@ -12,6 +12,9 @@ import java.net.URL;
 
 import com.wikipediaMatrix.exception.ArticleInexistantException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -20,6 +23,10 @@ import org.junit.Test;
  * @author Groupe 5
  *
  */
+
+@Getter
+@Setter
+@Slf4j
 public class UrlTest {
 
 	/**
@@ -137,6 +144,11 @@ public class UrlTest {
 	    br.close();
 	    assertEquals(1, articleInexistant);
 	    assertEquals(1, articleExistant);
-	    System.out.println("URLs sans article : " + articleInexistant);
+	    log.info("URLs sans article : " + articleInexistant);
+	}
+
+	@Test
+	public void testerConnexionHTTP(){
+
 	}
 }

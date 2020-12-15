@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.wikipediaMatrix.exception.ResultatEstNullException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mockito;
@@ -13,6 +16,10 @@ import org.mockito.Mockito;
  * @author Groupe 5
  *
  */
+
+@Getter
+@Setter
+@Slf4j
 public class ComparerCSVTest {
 
 	// On "mock" les classes qui vont être utilisées dans le test
@@ -31,7 +38,7 @@ public class ComparerCSVTest {
 		plusieurs statistiques, auxquelles on est cense pouvoir acceder depuis un objet ComparerCSV.
 		 */
 		Mockito.when(donneeHtmlTest.getHtml()).thenReturn("");
-		Mockito.when(donneeWikitableTest.getContenu()).thenReturn("");
+		Mockito.when(donneeWikitableTest.getWikitable()).thenReturn("");
 		Mockito.when(donneeHtmlTest.getTime()).thenReturn((long) 100);
 		Mockito.when(donneeWikitableTest.getTime()).thenReturn((long) 150);
 		Mockito.when(donneeHtmlTest.getLignesEcrites()).thenReturn(25);
@@ -50,7 +57,7 @@ public class ComparerCSVTest {
 		assertEquals(10, comparerCSV.getColonnesHtml());
 		assertEquals(8, comparerCSV.getColonnesWikitable());
 		assertEquals(8, comparerCSV.getTablesHtml());
-		assertEquals(7, comparerCSV.getTablesWikitable());
+		assertEquals(7, comparerCSV.getTablesWikitext());
 	}
 
 	/**

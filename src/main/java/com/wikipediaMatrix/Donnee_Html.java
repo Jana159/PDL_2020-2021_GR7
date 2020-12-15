@@ -2,6 +2,9 @@ package com.wikipediaMatrix;
 
 import com.wikipediaMatrix.exception.ExtractionInvalideException;
 import com.wikipediaMatrix.exception.UrlInvalideException;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,6 +14,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,11 +23,14 @@ import java.util.List;
  * @author Groupe 5
  *
  */
+@Getter
+@Setter
+@Slf4j
 public class Donnee_Html extends Donnee {
 	/**
 	 * Le HTML de la page wikipedia
 	 */
-	private String donneeHTML;
+	private String html;
 	private int nbTableauxExtraits;
 	private int ligneActuelle;
 	private int colonneActuelle;
@@ -36,38 +43,10 @@ public class Donnee_Html extends Donnee {
 	private int nbColonnesGlob;
 
 	public Donnee_Html() {
-		this.donneeHTML = "";
-		this.rowspanFound =  new ArrayList<int[]>();
+		this.html = "";
+		this.rowspanFound =  new ArrayList<>();
 	}
 
-	public String[][] getTableau(){
-		return this.tableau;
-	}
-
-	public void setTableau(String[][] tableau) {
-		this.tableau = tableau;
-	}
-
-	public void setColonneActuelle(int numColonne) {
-		this.colonneActuelle = numColonne;
-	}
-
-	public void setLigneActuelle(int numLigne) {
-		this.ligneActuelle = numLigne;
-	}
-
-	public String getHtml() {
-		return this.donneeHTML;
-	}
-
-	public void setHtml(String html) {
-		this.donneeHTML = html;
-	}
-
-	public void setUrl(Url url) {
-		this.url = url;
-	}
-	
 	/**
 	 * Lance l'execution d'un thread pour l'extraction des tableaux de la page wikipedia
 	 */
@@ -91,15 +70,15 @@ public class Donnee_Html extends Donnee {
 		String titre = url.getTitre();
 		/* On recupere le nombre calcule de lignes et de colonnes de tous
 		les tableaux de l'url*/
-		System.out.print("extraire");
+		log.info("extraire");
 		try {
 			URL urlExtraction = new URL("https://"+langue+".wikipedia.org/wiki/"+titre+"?action=render");
 			this.setHtml(this.recupContenu(urlExtraction));
 		} catch (ExtractionInvalideException erreurExtraction) {
-			System.out.println("ERREUR : " + erreurExtraction.toString());
+			log.error("ERREUR : " + erreurExtraction.toString());
 			hasPage = false;
 		}
-		supprimerPointsVirgule(this.donneeHTML);
+		supprimerPointsVirgule(this.html);
 		String titreSain = titre.replaceAll("[\\/\\?\\:\\<\\>]", "");
 		htmlVersCSV(titreSain);
 
@@ -118,8 +97,8 @@ public class Donnee_Html extends Donnee {
 	 * @throws ExtractionInvalideException si erreur à l'extraction
 	 */
 	public void htmlVersCSV(String titre) throws IOException, UrlInvalideException, ExtractionInvalideException {
-         System.out.print("htmltooocsv");
-		Document page = Jsoup.parseBodyFragment(this.donneeHTML);
+         log.debug("htmltooocsv");
+		Document page = Jsoup.parseBodyFragment(this.html);
 		Elements wikitables = page.getElementsByClass("wikitable");
 		Elements tablesNonWiki = page.select("table:not([^])");
 		wikitables.addAll(tablesNonWiki);
@@ -133,18 +112,18 @@ public class Donnee_Html extends Donnee {
 			yourFile.createNewFile();
 			FileOutputStream oFile = new FileOutputStream(yourFile, false);
 			FileOutputStream outputStream = new FileOutputStream(outputPath);
-			System.out.print("ouuuuuuut");
+			log.debug("ouuuuuuut");
 			OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
-			System.out.print("afteeeeeer");
+			log.debug("afteeeeeer");
 			// On recupere le nmobre de lignes et de colonnes du tableau en cours
 			nbLignesGlob = getNbLignesTableaux().get(i);
-			System.out.print("nbLignesGlobbbbbbbbbbbbbbbbb" + nbLignesGlob);
+			log.debug("nbLignesGlobbbbbbbbbbbbbbbbb" + nbLignesGlob);
 			nbColonnesGlob = getNbColonnesTableaux().get(i);
-			System.out.print("nbcoloonnGlobbbbbbbbbbbbbbbbb" + nbColonnesGlob);
+			log.debug("nbcoloonnGlobbbbbbbbbbbbbbbbb" + nbColonnesGlob);
 
 			// On initialise la matrice de donnees a la bonne taille
 			this.tableau = new String[nbLignesGlob][nbColonnesGlob];
-			System.out.print("this.tableauuuu" + this.tableau);
+			log.debug("this.tableauuuu" + Arrays.deepToString(this.tableau));
 			this.ligneActuelle = 0;
 			// On remplit toutes les lignes et colonnes de la matrice
 			for (String[] ligne: tableau) {
@@ -154,17 +133,17 @@ public class Donnee_Html extends Donnee {
 			this.rowspanFound.clear();
 
 			try {
-				System.out.print("wriiiiite");
+				log.debug("wriiiiite");
 				stockerLignes(wikitables.get(i));
 				// On cree un fichier CSV en parcourant la matrice
 				ecrireTableau(writer);
 				writer.close();
 			}
 			catch (Exception e){
-				System.out.println("L'extraction à échouée");
+				log.debug("L'extraction à échouée");
 				writer.close();
 			}
-		}	
+		}
 	}
 
 	/**
@@ -182,7 +161,7 @@ public class Donnee_Html extends Donnee {
 			Elements cellules = ligne.select("td, th");
 			/* Parcours des cellules de la ligne, et appel de methodes gerant les colspans et rowspans si besoin */
 			for (Element cellule : cellules) {
-				//System.out.println("Ligne " + this.ligneActuelle + " ; Colonne " + this.colonneActuelle);// Si on un colspan et un rowspan sur la meme cellule
+				//log.info("Ligne " + this.ligneActuelle + " ; Colonne " + this.colonneActuelle);// Si on un colspan et un rowspan sur la meme cellule
 				if ((cellule.hasAttr("colspan")) && (cellule.hasAttr("rowspan"))){
 					String colspanValue = cellule.attr("colspan").replaceAll("[^0-9.]", "");
 					String rowspanValue = cellule.attr("rowspan").replaceAll("[^0-9.]", "");
@@ -230,9 +209,7 @@ public class Donnee_Html extends Donnee {
 				}
 			}
 		}
-
 	}
-
 
 	/**
 	 * Ajoute un separateur après les données
@@ -280,16 +257,7 @@ public class Donnee_Html extends Donnee {
 	@Override
 	String recupContenu(URL url) throws ExtractionInvalideException {
 		try {
-			StringBuilder result = new StringBuilder();
-			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
-			String inputLine;
-
-			while ((inputLine = in.readLine()) != null)
-				result.append(inputLine);
-
-			in.close();
-			return result.toString();
+			return getBuilder(url);
 		} catch (Exception e) {
 			throw new ExtractionInvalideException("Recuperation du contenu impossible");
 		}
@@ -346,7 +314,7 @@ public class Donnee_Html extends Donnee {
 	 * @throws IOException si erreur survenue
 	 */
 	private void ecrireTableau(OutputStreamWriter writer) throws IOException {
-		System.out.print("Ecriiiiiiiiiiire ====>" + writer  + "tableauuuuuuu ====> "+ this.tableau);
+		log.debug("Ecriiiiiiiiiiire ====>" + writer  + "tableauuuuuuu ====> "+ Arrays.deepToString(this.tableau));
 
 		for (int i = 0; i < this.tableau.length; i++) {
 			boolean contientInfos = ligneContientInfos(i);
@@ -357,7 +325,7 @@ public class Donnee_Html extends Donnee {
 			}
 			// Si la ligne n'est pas vide, alors on fait un saut de ligne
 			if (contientInfos) {
-				writer.write("\n");				
+				writer.write("\n");
 			}
 		}
 	}
@@ -371,15 +339,15 @@ public class Donnee_Html extends Donnee {
 	 */
 	@Override
 	public boolean pageComporteTableau() throws ExtractionInvalideException {
-		System.out.println("ERREUR page : " + this.donneeHTML);
-		Document page = Jsoup.parseBodyFragment(this.donneeHTML);
-		System.out.println("ERREUR page After: ");
+		log.error("ERREUR page : " + this.html);
+		Document page = Jsoup.parseBodyFragment(this.html);
+		log.error("ERREUR page After: ");
 		if((!page.getElementsByClass("wikitable").isEmpty()) || (!page.select("table:not([^])").isEmpty())) {
 			return true;
 		}
 		else {
-			System.out.println(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
-			return false;	
+			log.info(new ExtractionInvalideException("Aucun tableau present dans la page").getMessage());
+			return false;
 		}
 	}
 
@@ -390,7 +358,7 @@ public class Donnee_Html extends Donnee {
 	 * @param html la page html
 	 */
 	public void supprimerPointsVirgule(String html){
-		this.donneeHTML = html.replaceAll(";", " ");
+		this.html = html.replaceAll(";", " ");
 	}
 
 
@@ -476,26 +444,5 @@ public class Donnee_Html extends Donnee {
 	@Override
 	public int getNbTableaux() {
 		return this.nbTableauxExtraits;
-	}
-
-
-	/**
-	 * Renvoie le nombre de colonnes ecrites dans le csv
-	 * a partir du parsing d'une page.
-	 * @return le nombre de colonne écrite
-	 */
-	public int getColonnesEcrites() {
-		return this.colonnesEcrites;
-	}
-
-
-	/**
-	 * Renvoie le nombre de lignes ecrites dans le csv 
-	 * a partir du parsing d'une page.
-	 *
-	 * @return le nombre de ligne écrites
-	 */
-	public int getLignesEcrites() {
-		return this.lignesEcrites;
 	}
 }
